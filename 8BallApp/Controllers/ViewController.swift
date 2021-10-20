@@ -40,6 +40,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func askAgainTapped(_ sender: UIButton) {
+        textField.text = ""
         textField.isHidden = false
         mainLabel.text = defaultString
         replayButton.isHidden = true

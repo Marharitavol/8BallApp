@@ -12,15 +12,23 @@ class SettingsViewController: UIViewController {
     
     private let tableView = UITableView()
     
-    private var array = ["from API", "Just do it!", "Change your mind"]
+    private var array = [String]()
+    
+    private let userDefaultsManager = UserDefaultsManager()
     
     private let answerManager = AnswerManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        array = userDefaultsManager.answerArray
+        
         setupTableView()
         selectRow()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        userDefaultsManager.answerArray = array
     }
     
     @IBAction func answerAddTapped(_ sender: UIBarButtonItem) {
@@ -52,12 +60,13 @@ class SettingsViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     private func selectRow() {
         let selectedIndex = array.firstIndex(of: answerManager.answer) ?? 0
-        tableView.selectRow(at: IndexPath(row: selectedIndex, section: 0), animated: false, scrollPosition: .middle)
+        tableView.selectRow(at: IndexPath(row: selectedIndex, section: 0), animated: false, scrollPosition: .none)
     }
     
 }
@@ -73,7 +82,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let answer = array[indexPath.row]
         
         cell.textLabel?.text = answer
-        
         return cell
     }
     
@@ -82,8 +90,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        print(array[indexPath.row])
         answerManager.answer = array[indexPath.row]
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Please choose which answer will be used"
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
 }
