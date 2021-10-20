@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var replayButton: UIButton!
     
     private let defaultString = "Ask a question and shake the phone"
-    private let networkManager = NetworkManager()
+    private let answerManager = AnswerManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard let text = textField.text, !text.isEmpty else { return }
         textField.endEditing(true)
-        networkManager.fetchData { (answer) in
+        answerManager.fetchData { (answer) in
             DispatchQueue.main.async {
                 self.ballAnswerLabel.text = answer
                 self.ballAnswerLabel.isHidden = false
@@ -40,6 +40,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func askAgainTapped(_ sender: UIButton) {
+        textField.text = ""
         textField.isHidden = false
         mainLabel.text = defaultString
         replayButton.isHidden = true

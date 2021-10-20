@@ -7,11 +7,18 @@
 
 import UIKit
 
-
-
-class NetworkManager {
+class AnswerManager {
+    
+    static let shared = AnswerManager()
+    
+    var answer = "from API"
     
     func fetchData(completion: @escaping (_ answer: String?)->()) {
+        
+        guard answer == "from API" else {
+            completion(answer)
+            return
+        }
         
         guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/question") else { return }
         
