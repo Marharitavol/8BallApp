@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,7 @@
 		5C2F39BB271F3B7800ABD5E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C2F39BA271F3B7800ABD5E1 /* Assets.xcassets */; };
 		5C2F39BE271F3B7800ABD5E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2F39BC271F3B7800ABD5E1 /* LaunchScreen.storyboard */; };
 		5C2F39C7271F4F3300ABD5E1 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F39C6271F4F3300ABD5E1 /* ApiResponse.swift */; };
-		5C2F39D2271F52D600ABD5E1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F39D1271F52D600ABD5E1 /* NetworkManager.swift */; };
+		5C2F39D2271F52D600ABD5E1 /* AnswerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F39D1271F52D600ABD5E1 /* AnswerManager.swift */; };
 		5CEBE447272027A200076C2E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEBE446272027A200076C2E /* SettingsViewController.swift */; };
 		9882861649ACC0E73F5F8B93 /* Pods_8BallApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B4FDF3EF1385ADE1A32EEF /* Pods_8BallApp.framework */; };
 /* End PBXBuildFile section */
@@ -30,7 +30,7 @@
 		5C2F39BD271F3B7800ABD5E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C2F39BF271F3B7800ABD5E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C2F39C6271F4F3300ABD5E1 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
-		5C2F39D1271F52D600ABD5E1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		5C2F39D1271F52D600ABD5E1 /* AnswerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerManager.swift; sourceTree = "<group>"; };
 		5CEBE446272027A200076C2E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B209BB7788A37E4EF190ED8D /* Pods-8BallApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-8BallApp.debug.xcconfig"; path = "Target Support Files/Pods-8BallApp/Pods-8BallApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D5B4FDF3EF1385ADE1A32EEF /* Pods_8BallApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_8BallApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +62,6 @@
 				B209BB7788A37E4EF190ED8D /* Pods-8BallApp.debug.xcconfig */,
 				30720D65DB3E8473862592C5 /* Pods-8BallApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -110,7 +109,7 @@
 		5CEBE43F2720216B00076C2E /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				5C2F39D1271F52D600ABD5E1 /* NetworkManager.swift */,
+				5C2F39D1271F52D600ABD5E1 /* AnswerManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -249,7 +248,7 @@
 			files = (
 				5C2F39B6271F3B7500ABD5E1 /* ViewController.swift in Sources */,
 				5C2F39C7271F4F3300ABD5E1 /* ApiResponse.swift in Sources */,
-				5C2F39D2271F52D600ABD5E1 /* NetworkManager.swift in Sources */,
+				5C2F39D2271F52D600ABD5E1 /* AnswerManager.swift in Sources */,
 				5C2F39B2271F3B7500ABD5E1 /* AppDelegate.swift in Sources */,
 				5C2F39B4271F3B7500ABD5E1 /* SceneDelegate.swift in Sources */,
 				5CEBE447272027A200076C2E /* SettingsViewController.swift in Sources */,
