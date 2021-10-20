@@ -115,17 +115,17 @@
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="128.57142857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings-->
         <scene sceneID="BFa-lE-2fI">
             <objects>
-                <viewController id="Gs7-iu-P8w" sceneMemberID="viewController">
+                <viewController id="Gs7-iu-P8w" customClass="SettingsViewController" customModule="_BallApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uYN-iw-Pnn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="CkC-Cs-TOc"/>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="GiK-hM-wPR"/>
+                    <navigationItem key="navigationItem" title="Settings" id="GiK-hM-wPR"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y6O-KV-LXB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
