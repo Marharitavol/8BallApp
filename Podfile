@@ -8,5 +8,6 @@ target '8BallApp' do
   # Pods for 8BallApp
 
   pod 'SnapKit', '~> 5.0.0'
+  pod 'Alamofire', '~> 5.4'
 
 end
