@@ -7,9 +7,11 @@
 
 import UIKit
 
-class AnswerManager {
-    
-    static let shared = AnswerManager()
+protocol NetworkDataProvider {
+    func fetchData(completion: @escaping (_ answer: String?)->())
+}
+
+class NetworkClient: NetworkDataProvider {
     
     var answer = "from API"
     

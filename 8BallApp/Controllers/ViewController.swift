@@ -16,19 +16,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var replayButton: UIButton!
     
     private let defaultString = "Ask a question and shake the phone"
-    private let answerManager = AnswerManager.shared
+    private var repository: RepositoryProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textField.delegate = self
         setupReplayButton()
+        setupRepository()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "settings" else { return }
+        guard let destinationVC = segue.destination as? SettingsViewController else { return }
+        destinationVC.repository = repository
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard let text = textField.text, !text.isEmpty else { return }
         textField.endEditing(true)
-        answerManager.fetchData { (answer) in
+        repository?.fetchData { (answer) in
             DispatchQueue.main.async {
                 self.ballAnswerLabel.text = answer
                 self.ballAnswerLabel.isHidden = false
@@ -39,7 +46,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func askAgainTapped(_ sender: UIButton) {
+    @IBAction private func askAgainTapped(_ sender: UIButton) {
         textField.text = ""
         textField.isHidden = false
         mainLabel.text = defaultString
@@ -54,6 +61,10 @@ class ViewController: UIViewController {
     private func setupReplayButton() {
         replayButton.isHidden = true
         replayButton.layer.cornerRadius = 15
+    }
+    
+    private func setupRepository() {
+        repository = Repository(networkDataProvider: NetworkClient(), dBProvider: UserDefaultsManager())
     }
 }
 

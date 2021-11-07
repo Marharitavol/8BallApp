@@ -14,24 +14,17 @@ class SettingsViewController: UIViewController {
     
     private var array = [String]()
     
-    private let userDefaultsManager = UserDefaultsManager()
-    
-    private let answerManager = AnswerManager.shared
-    
+    var repository: RepositoryProtocol?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        array = userDefaultsManager.answerArray
+        array = repository?.getAnswersFromBD() ?? [String]()
         
         setupTableView()
         selectRow()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        userDefaultsManager.answerArray = array
-    }
-    
-    @IBAction func answerAddTapped(_ sender: UIBarButtonItem) {
+    @IBAction private func answerAddTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Create new answer", message: nil, preferredStyle: .alert)
         
         alertController.addTextField(configurationHandler: nil)
@@ -39,6 +32,7 @@ class SettingsViewController: UIViewController {
         let okAction = UIAlertAction(title: "Create", style: .default) { (action) in
             guard let text = alertController.textFields?.first?.text else { return }
             self.array.append(text)
+            self.repository?.saveAnswerToBD(text)
             self.tableView.reloadData()
             self.selectRow()
         }
@@ -65,7 +59,7 @@ class SettingsViewController: UIViewController {
     }
     
     private func selectRow() {
-        let selectedIndex = array.firstIndex(of: answerManager.answer) ?? 0
+        let selectedIndex = array.firstIndex(of: repository?.getCurrentAnswer() ?? "") ?? 0
         tableView.selectRow(at: IndexPath(row: selectedIndex, section: 0), animated: false, scrollPosition: .none)
     }
     
@@ -90,7 +84,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        answerManager.answer = array[indexPath.row]
+        repository?.changeCurrentAnswer(array[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

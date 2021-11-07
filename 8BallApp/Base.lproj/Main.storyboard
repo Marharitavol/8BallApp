@@ -91,7 +91,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" id="teW-S2-DFu">
                             <imageReference key="image" image="line.horizontal.3" catalog="system" renderingMode="original"/>
                             <connections>
-                                <segue destination="Gs7-iu-P8w" kind="show" id="PkU-hh-v58"/>
+                                <segue destination="Gs7-iu-P8w" kind="show" identifier="settings" id="PkU-hh-v58"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
