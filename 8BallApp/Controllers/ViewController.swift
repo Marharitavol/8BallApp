@@ -6,21 +6,34 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var mainLabel: UILabel!
-    @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var ballAnswerLabel: UILabel!
-    @IBOutlet weak var ballEmojiLabel: UILabel!
-    @IBOutlet weak var replayButton: UIButton!
+    private let mainLabel = UILabel()
+    private let textField = UITextField()
+    private let ballAnswerLabel = UILabel()
+    private let ballEmojiLabel = UILabel()
+    private let replayButton = UIButton()
+    
+    private let repository: Repository
     
     private let defaultString = "Ask a question and shake the phone"
+    
+    init(repository: Repository) {
+            self.repository = repository
+            super.init(nibName: nil, bundle: nil)
+        }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textField.delegate = self
+        setupSubviews()
         setupReplayButton()
     }
     
@@ -54,6 +67,52 @@ class ViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         textField.endEditing(true)
+    }
+    
+    private func setupSubviews() {
+        view.backgroundColor = .systemPink
+        
+        view.addSubview(ballEmojiLabel)
+        ballEmojiLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.size.equalTo(305)
+        }
+        ballEmojiLabel.text = "🔮"
+        ballEmojiLabel.textAlignment = .center
+        ballEmojiLabel.font = UIFont(name: "System", size: 280)
+        
+        view.addSubview(ballAnswerLabel)
+        ballAnswerLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.height.equalTo(150)
+            make.width.equalTo(180)
+        }
+        ballAnswerLabel.textAlignment = .center
+        
+        view.addSubview(replayButton)
+        replayButton.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(40)
+            make.height.equalTo(60)
+            make.width.equalTo(160)
+        }
+        
+        view.addSubview(mainLabel)
+        mainLabel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(50)
+            make.height.equalTo(44)
+        }
+        mainLabel.text = "Ask a question and shake the phone"
+        mainLabel.textAlignment = .center
+        
+        view.addSubview(textField)
+        textField.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(mainLabel.snp.bottom).inset(-40)
+        }
+        textField.backgroundColor = .white
+        
     }
     
     private func setupReplayButton() {

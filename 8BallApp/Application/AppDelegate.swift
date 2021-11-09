@@ -7,8 +7,6 @@
 
 import UIKit
 
-let repository = Repository()
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
