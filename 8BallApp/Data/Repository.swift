@@ -21,7 +21,7 @@ class Repository: RepositoryProtocol {
     
     private var currentAnswer = "from API"
     
-    init(networkDataProvider: NetworkDataProvider, dBProvider: DBProvider) {
+    init(networkDataProvider: NetworkDataProvider = NetworkClient(), dBProvider: DBProvider = UserDefaultsManager()) {
         self.networkDataProvider = networkDataProvider
         self.dBProvider = dBProvider
     }

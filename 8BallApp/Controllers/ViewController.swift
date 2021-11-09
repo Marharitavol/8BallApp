@@ -16,14 +16,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var replayButton: UIButton!
     
     private let defaultString = "Ask a question and shake the phone"
-    private var repository: RepositoryProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textField.delegate = self
         setupReplayButton()
-        setupRepository()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -35,7 +33,7 @@ class ViewController: UIViewController {
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard let text = textField.text, !text.isEmpty else { return }
         textField.endEditing(true)
-        repository?.fetchData { (answer) in
+        repository.fetchData { (answer) in
             DispatchQueue.main.async {
                 self.ballAnswerLabel.text = answer
                 self.ballAnswerLabel.isHidden = false
@@ -61,10 +59,6 @@ class ViewController: UIViewController {
     private func setupReplayButton() {
         replayButton.isHidden = true
         replayButton.layer.cornerRadius = 15
-    }
-    
-    private func setupRepository() {
-        repository = Repository(networkDataProvider: NetworkClient(), dBProvider: UserDefaultsManager())
     }
 }
 
