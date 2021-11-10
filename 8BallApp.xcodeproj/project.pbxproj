@@ -154,6 +154,7 @@
 			buildConfigurationList = 5C2F39C2271F3B7800ABD5E1 /* Build configuration list for PBXNativeTarget "8BallApp" */;
 			buildPhases = (
 				F10095715FABE10489D6498D /* [CP] Check Pods Manifest.lock */,
+				5CD58E14273C641600AEA535 /* ShellScript */,
 				5C2F39AA271F3B7500ABD5E1 /* Sources */,
 				5C2F39AB271F3B7500ABD5E1 /* Frameworks */,
 				5C2F39AC271F3B7500ABD5E1 /* Resources */,
@@ -214,6 +215,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5CD58E14273C641600AEA535 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 		8B9BC14F819F92FD6823DE5A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -12,12 +12,13 @@ protocol DBProvider {
 }
 
 class UserDefaultsManager: DBProvider {
-    
+
     private let defaults = UserDefaults.standard
-    
+
     var answerArray: [String] {
         get {
-            return defaults.object(forKey: "answerArray") as? [String] ?? ["from API", "Just do it!", "Change your mind"]
+            let chosenAnswers = ["from API", "Just do it!", "Change your mind"]
+            return defaults.object(forKey: "answerArray") as? [String] ?? chosenAnswers
         }
         set {
             defaults.set(newValue, forKey: "answerArray")
