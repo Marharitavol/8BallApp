@@ -7,12 +7,13 @@
 
 import Foundation
 
-class UserDefaultsManager {
-    
-    private let defaults = UserDefaults.standard
+protocol DBProvider {
+    var answerArray: [String] { get set }
 }
 
-extension UserDefaultsManager {
+class UserDefaultsManager: DBProvider {
+    
+    private let defaults = UserDefaults.standard
     
     var answerArray: [String] {
         get {
