@@ -21,9 +21,9 @@ class ViewController: UIViewController {
     private let defaultString = "Ask a question and shake the phone"
     
     init(repository: Repository) {
-            self.repository = repository
-            super.init(nibName: nil, bundle: nil)
-        }
+        self.repository = repository
+        super.init(nibName: nil, bundle: nil)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

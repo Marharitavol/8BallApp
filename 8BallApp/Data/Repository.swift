@@ -8,7 +8,7 @@
 import UIKit
 
 protocol RepositoryProtocol {
-    func fetchData(completion: @escaping (_ answer: String?)->())
+    func fetchData(completion: @escaping (_ answer: String?) -> Void)
     func saveAnswerToBD(_ answer: String)
     func changeCurrentAnswer(_ answer: String)
     func getAnswersFromBD() -> [String]
@@ -26,7 +26,7 @@ class Repository: RepositoryProtocol {
         self.dBProvider = dBProvider
     }
     
-    func fetchData(completion: @escaping (_ answer: String?)->()) {
+    func fetchData(completion: @escaping (_ answer: String?) -> Void) {
         guard currentAnswer == "from API" else {
             completion(currentAnswer)
             return
