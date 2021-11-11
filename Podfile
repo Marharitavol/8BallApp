@@ -10,5 +10,6 @@ target '8BallApp' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'Alamofire', '~> 5.4'
   pod 'SwiftLint'
+  pod 'SwiftGen', '~> 6.0'
 
 end

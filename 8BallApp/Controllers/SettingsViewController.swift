@@ -25,11 +25,11 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction private func answerAddTapped(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Create new answer", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: L10n.alertTitle, message: nil, preferredStyle: .alert)
 
         alertController.addTextField(configurationHandler: nil)
 
-        let okAction = UIAlertAction(title: "Create", style: .default) { (_) in
+        let okAction = UIAlertAction(title: L10n.alertOk, style: .default) { (_) in
             guard let text = alertController.textFields?.first?.text else { return }
             self.array.append(text)
             self.repository?.saveAnswerToBD(text)
@@ -37,7 +37,7 @@ class SettingsViewController: UIViewController {
             self.selectRow()
         }
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: L10n.alertCancel, style: .cancel)
 
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.identifier)
     }
 
     private func selectRow() {
@@ -71,7 +71,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: L10n.identifier, for: indexPath)
         let answer = array[indexPath.row]
 
         cell.textLabel?.text = answer
@@ -87,7 +87,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Please choose which answer will be used"
+        return L10n.settingsHeader
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

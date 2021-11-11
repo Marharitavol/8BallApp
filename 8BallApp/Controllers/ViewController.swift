@@ -18,8 +18,6 @@ class ViewController: UIViewController {
 
     private let repository: Repository
 
-    private let defaultString = "Ask a question and shake the phone"
-
     init(repository: Repository) {
         self.repository = repository
         super.init(nibName: nil, bundle: nil)
@@ -43,7 +41,7 @@ class ViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "settings" else { return }
+        guard segue.identifier == L10n.segueIdentifier else { return }
         guard let destinationVC = segue.destination as? SettingsViewController else { return }
         destinationVC.repository = repository
     }
@@ -65,7 +63,7 @@ class ViewController: UIViewController {
     @objc private func askAgainTapped(_ sender: UIButton) {
         textField.text = ""
         textField.isHidden = false
-        mainLabel.text = defaultString
+        mainLabel.text = L10n.ruleTitle
         replayButton.isHidden = true
         ballAnswerLabel.isHidden = true
     }
@@ -75,13 +73,13 @@ class ViewController: UIViewController {
     }
 
     private func setupSubviews() {
-        view.backgroundColor = .systemPurple
+        view.backgroundColor = Asset.purple.color
         view.addSubview(ballEmojiLabel)
         ballEmojiLabel.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
             make.size.equalTo(305)
         }
-        ballEmojiLabel.text = "🔮"
+        ballEmojiLabel.text = L10n.emoji
         ballEmojiLabel.textAlignment = .center
         ballEmojiLabel.font = ballEmojiLabel.font.withSize(280)
 
@@ -92,7 +90,7 @@ class ViewController: UIViewController {
             make.width.equalTo(180)
         }
         ballAnswerLabel.textAlignment = .center
-        ballAnswerLabel.textColor = .white
+        ballAnswerLabel.textColor = Asset.white.color
 
         view.addSubview(replayButton)
         replayButton.snp.makeConstraints { (make) in
@@ -108,7 +106,7 @@ class ViewController: UIViewController {
             make.top.equalToSuperview().inset(75)
             make.height.equalTo(44)
         }
-        mainLabel.text = "Ask a question and shake the phone"
+        mainLabel.text = L10n.ruleTitle
         mainLabel.textAlignment = .center
         mainLabel.textColor = .white
 
@@ -118,16 +116,16 @@ class ViewController: UIViewController {
             make.top.equalTo(mainLabel.snp.bottom).inset(-30)
             make.height.equalTo(30)
         }
-        textField.backgroundColor = .white
+        textField.backgroundColor = Asset.white.color
         textField.layer.cornerRadius = 6
     }
     
     private func setupReplayButton() {
-        replayButton.setTitle("Change question", for: .normal)
-        replayButton.setTitleColor(.white, for: .normal)
+        replayButton.setTitle(L10n.buttonText, for: .normal)
+        replayButton.setTitleColor(Asset.white.color, for: .normal)
         replayButton.layer.cornerRadius = 15
         replayButton.layer.borderWidth = 2.0
-        replayButton.layer.borderColor = (UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)).cgColor
+        replayButton.layer.borderColor = Asset.white.color.cgColor
         replayButton.clipsToBounds = true
         replayButton.isHidden = true
         replayButton.addTarget(self, action: #selector(askAgainTapped), for: .touchUpInside)
@@ -137,8 +135,8 @@ class ViewController: UIViewController {
     private func setupNavigationBar() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"),
+        navigationController?.navigationBar.tintColor = Asset.white.color
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Asset.icon.image,
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(editButtonTapped))
