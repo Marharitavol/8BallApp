@@ -13,16 +13,16 @@ protocol NetworkDataProvider {
 
 class NetworkClient: NetworkDataProvider {
 
-    var answer = "from API"
+    var answer = L10n.fromAPI
 
     func fetchData(completion: @escaping (_ answer: String?) -> Void) {
 
-        guard answer == "from API" else {
+        guard answer == L10n.fromAPI else {
             completion(answer)
             return
         }
 
-        guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/question") else { return }
+        guard let url = URL(string: L10n.apiUrl) else { return }
 
         URLSession.shared.dataTask(with: url) { (data, _, _) in
 

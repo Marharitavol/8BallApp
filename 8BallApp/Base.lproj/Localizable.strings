@@ -18,3 +18,8 @@
 "alert-cancel" = "Cancel";
 "alert-title" = "Create new answer";
 "settings-header" = "Please choose which answer will be used";
+
+// Additional
+"from-API" = "from API";
+"api-url" = "https://8ball.delegator.com/magic/JSON/question";
+"user-defaults-key" = "answerArray";

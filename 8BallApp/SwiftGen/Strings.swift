@@ -16,10 +16,14 @@ internal enum L10n {
   internal static let alertOk = L10n.tr("Localizable", "alert-ok")
   /// Create new answer
   internal static let alertTitle = L10n.tr("Localizable", "alert-title")
+  /// https://8ball.delegator.com/magic/JSON/question
+  internal static let apiUrl = L10n.tr("Localizable", "api-url")
   /// Change question
   internal static let buttonText = L10n.tr("Localizable", "button-text")
   /// 🔮
   internal static let emoji = L10n.tr("Localizable", "emoji")
+  /// from API
+  internal static let fromAPI = L10n.tr("Localizable", "from-API")
   /// cell
   internal static let identifier = L10n.tr("Localizable", "identifier")
   /// Ask a question and shake the phone
@@ -28,6 +32,8 @@ internal enum L10n {
   internal static let segueIdentifier = L10n.tr("Localizable", "segue-identifier")
   /// Please choose which answer will be used
   internal static let settingsHeader = L10n.tr("Localizable", "settings-header")
+  /// answerArray
+  internal static let userDefaultsKey = L10n.tr("Localizable", "user-defaults-key")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

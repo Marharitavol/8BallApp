@@ -19,7 +19,7 @@ class Repository: RepositoryProtocol {
     private let networkDataProvider: NetworkDataProvider
     private var dBProvider: DBProvider
 
-    private var currentAnswer = "from API"
+    private var currentAnswer = L10n.fromAPI
 
     init(networkDataProvider: NetworkDataProvider = NetworkClient(), dBProvider: DBProvider = UserDefaultsManager()) {
         self.networkDataProvider = networkDataProvider
@@ -27,7 +27,7 @@ class Repository: RepositoryProtocol {
     }
 
     func fetchData(completion: @escaping (_ answer: String?) -> Void) {
-        guard currentAnswer == "from API" else {
+        guard currentAnswer == L10n.fromAPI else {
             completion(currentAnswer)
             return
         }
