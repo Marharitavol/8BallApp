@@ -22,7 +22,7 @@ class NetworkClient: NetworkDataProvider {
             return
         }
 
-        guard let url = URL(string: L10n.apiUrl) else { return }
+        guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/question") else { return }
 
         URLSession.shared.dataTask(with: url) { (data, _, _) in
 

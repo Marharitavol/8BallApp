@@ -103,12 +103,10 @@
 				5CEBE4432720222E00076C2E /* Controllers */,
 				5CEBE43F2720216B00076C2E /* Service */,
 				5CEBE43E2720215800076C2E /* Models */,
-				5C2F39BA271F3B7800ABD5E1 /* Assets.xcassets */,
 				5C2F39B7271F3B7500ABD5E1 /* Main.storyboard */,
 				5C2F39BC271F3B7800ABD5E1 /* LaunchScreen.storyboard */,
 				5C2F39BF271F3B7800ABD5E1 /* Info.plist */,
-				5CC9E5FC273D69D7007AB7C8 /* SwiftGen */,
-				5CC9E612273D78C5007AB7C8 /* Localizable.strings */,
+				5CB62BF8273EA494006F8DB0 /* Resourses */,
 			);
 			path = 8BallApp;
 			sourceTree = "<group>";
@@ -119,6 +117,16 @@
 				5C92415D2738442E008ECF51 /* Repository.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		5CB62BF8273EA494006F8DB0 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				5C2F39BA271F3B7800ABD5E1 /* Assets.xcassets */,
+				5CC9E612273D78C5007AB7C8 /* Localizable.strings */,
+				5CC9E5FC273D69D7007AB7C8 /* SwiftGen */,
+			);
+			path = Resourses;
 			sourceTree = "<group>";
 		};
 		5CC9E5FC273D69D7007AB7C8 /* SwiftGen */ = {
@@ -174,6 +182,7 @@
 			buildPhases = (
 				F10095715FABE10489D6498D /* [CP] Check Pods Manifest.lock */,
 				5CD58E14273C641600AEA535 /* Run Script */,
+				5CF4AADB273E78B8006BA22B /* SwiftGen */,
 				5C2F39AA271F3B7500ABD5E1 /* Sources */,
 				5C2F39AB271F3B7500ABD5E1 /* Frameworks */,
 				5C2F39AC271F3B7500ABD5E1 /* Resources */,
@@ -252,6 +261,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		5CF4AADB273E78B8006BA22B /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftGen/bin/swiftgen\n";
 		};
 		8B9BC14F819F92FD6823DE5A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

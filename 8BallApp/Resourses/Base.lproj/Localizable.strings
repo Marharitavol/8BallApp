@@ -21,5 +21,6 @@
 
 // Additional
 "from-API" = "from API";
-"api-url" = "https://8ball.delegator.com/magic/JSON/question";
 "user-defaults-key" = "answerArray";
+"just-do-it" = "Just do it!";
+"change-your-mind" = "Change your mind";

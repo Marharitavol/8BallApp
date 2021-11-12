@@ -16,16 +16,18 @@ internal enum L10n {
   internal static let alertOk = L10n.tr("Localizable", "alert-ok")
   /// Create new answer
   internal static let alertTitle = L10n.tr("Localizable", "alert-title")
-  /// https://8ball.delegator.com/magic/JSON/question
-  internal static let apiUrl = L10n.tr("Localizable", "api-url")
   /// Change question
   internal static let buttonText = L10n.tr("Localizable", "button-text")
+  /// Change your mind
+  internal static let changeYourMind = L10n.tr("Localizable", "change-your-mind")
   /// 🔮
   internal static let emoji = L10n.tr("Localizable", "emoji")
   /// from API
   internal static let fromAPI = L10n.tr("Localizable", "from-API")
   /// cell
   internal static let identifier = L10n.tr("Localizable", "identifier")
+  /// Just do it!
+  internal static let justDoIt = L10n.tr("Localizable", "just-do-it")
   /// Ask a question and shake the phone
   internal static let ruleTitle = L10n.tr("Localizable", "rule-title")
   /// settings

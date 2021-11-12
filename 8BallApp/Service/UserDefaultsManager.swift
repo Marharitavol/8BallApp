@@ -17,7 +17,7 @@ class UserDefaultsManager: DBProvider {
 
     var answerArray: [String] {
         get {
-            let chosenAnswers = ["from API", "Just do it!", "Change your mind"]
+            let chosenAnswers = [L10n.fromAPI, L10n.justDoIt, L10n.changeYourMind]
             return defaults.object(forKey: L10n.userDefaultsKey) as? [String] ?? chosenAnswers
         }
         set {
