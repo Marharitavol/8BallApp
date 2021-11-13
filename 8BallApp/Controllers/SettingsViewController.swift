@@ -20,11 +20,37 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         array = repository?.getAnswersFromBD() ?? [String]()
 
+        setupNavigationController()
         setupTableView()
         selectRow()
     }
 
-    @IBAction private func answerAddTapped(_ sender: UIBarButtonItem) {
+    private func setupTableView() {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+
+        tableView.backgroundColor = Asset.purple.color
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.identifier)
+    }
+
+    private func selectRow() {
+        let selectedIndex = array.firstIndex(of: repository?.getCurrentAnswer() ?? "") ?? 0
+        tableView.selectRow(at: IndexPath(row: selectedIndex, section: 0), animated: false, scrollPosition: .none)
+    }
+    
+    private func setupNavigationController() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add,
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(answerAddTapped))
+    }
+    
+    @objc func answerAddTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: L10n.alertTitle, message: nil, preferredStyle: .alert)
 
         alertController.addTextField(configurationHandler: nil)
@@ -44,24 +70,6 @@ class SettingsViewController: UIViewController {
 
         present(alertController, animated: true, completion: nil)
     }
-
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.identifier)
-    }
-
-    private func selectRow() {
-        let selectedIndex = array.firstIndex(of: repository?.getCurrentAnswer() ?? "") ?? 0
-        tableView.selectRow(at: IndexPath(row: selectedIndex, section: 0), animated: false, scrollPosition: .none)
-    }
-
 }
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
