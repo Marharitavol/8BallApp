@@ -1,0 +1,11 @@
+strings:
+  inputs: 8BallApp/Resourses/Base.lproj
+  filter: .+\.strings$
+  outputs:
+    - templateName: structured-swift5
+      output: 8BallApp/Resourses/SwiftGen/Strings.swift
+xcassets:
+  inputs: 8BallApp/Resourses/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      output: 8BallApp/Resourses/SwiftGen/Assets.swift

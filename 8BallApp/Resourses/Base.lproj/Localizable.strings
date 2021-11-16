@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  8BallApp
+
+  Created by Rita on 11.11.2021.
+  
+*/
+
+// First screen
+"rule-title" = "Ask a question and shake the phone";
+"segue-identifier" = "settings";
+"button-text" = "Change question";
+"emoji" = "🔮";
+
+// Settings
+"identifier" = "cell";
+"alert-ok" = "Create";
+"alert-cancel" = "Cancel";
+"alert-title" = "Create new answer";
+"settings-header" = "Please choose which answer will be used";
+
+// Additional
+"from-API" = "from API";
+"user-defaults-key" = "answerArray";
+"just-do-it" = "Just do it!";
+"change-your-mind" = "Change your mind";

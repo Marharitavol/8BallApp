@@ -18,37 +18,37 @@ protocol RepositoryProtocol {
 class Repository: RepositoryProtocol {
     private let networkDataProvider: NetworkDataProvider
     private var dBProvider: DBProvider
-    
-    private var currentAnswer = "from API"
-    
+
+    private var currentAnswer = L10n.fromAPI
+
     init(networkDataProvider: NetworkDataProvider = NetworkClient(), dBProvider: DBProvider = UserDefaultsManager()) {
         self.networkDataProvider = networkDataProvider
         self.dBProvider = dBProvider
     }
-    
+
     func fetchData(completion: @escaping (_ answer: String?) -> Void) {
-        guard currentAnswer == "from API" else {
+        guard currentAnswer == L10n.fromAPI else {
             completion(currentAnswer)
             return
         }
-        
+
         networkDataProvider.fetchData { (answer) in
             completion(answer)
         }
     }
-    
+
     func saveAnswerToBD(_ answer: String) {
         dBProvider.answerArray.append(answer)
     }
-    
+
     func changeCurrentAnswer(_ answer: String) {
         currentAnswer = answer
     }
-    
+
     func getAnswersFromBD() -> [String] {
         dBProvider.answerArray
     }
-    
+
     func getCurrentAnswer() -> String {
         currentAnswer
     }
