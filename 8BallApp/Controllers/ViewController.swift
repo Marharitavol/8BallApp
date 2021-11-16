@@ -36,16 +36,6 @@ class ViewController: UIViewController {
         setupReplayButton()
     }
 
-    @objc func editButtonTapped() {
-        print("tap")
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == L10n.segueIdentifier else { return }
-        guard let destinationVC = segue.destination as? SettingsViewController else { return }
-        destinationVC.repository = repository
-    }
-
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard let text = textField.text, !text.isEmpty else { return }
         textField.endEditing(true)
@@ -140,6 +130,12 @@ class ViewController: UIViewController {
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(editButtonTapped))
+    }
+    
+    @objc func editButtonTapped() {
+        let settingsVC = SettingsViewController()
+        settingsVC.repository = repository
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
 }
 
