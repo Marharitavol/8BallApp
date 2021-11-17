@@ -5,7 +5,7 @@
 //  Created by Rita on 19.10.2021.
 //
 
-import UIKit
+import Foundation
 
 protocol NetworkDataProvider {
     func fetchData(completion: @escaping (_ answer: String?) -> Void)

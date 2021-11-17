@@ -13,7 +13,6 @@
 "emoji" = "🔮";
 
 // Settings
-"identifier" = "cell";
 "alert-ok" = "Create";
 "alert-cancel" = "Cancel";
 "alert-title" = "Create new answer";

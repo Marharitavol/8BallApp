@@ -8,18 +8,17 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class BallViewController: UIViewController {
 
+    private let viewModel: BallViewModel
     private let mainLabel = UILabel()
     private let textField = UITextField()
     private let ballAnswerLabel = UILabel()
     private let ballEmojiLabel = UILabel()
     private let replayButton = UIButton()
 
-    private let repository: Repository
-
-    init(repository: Repository) {
-        self.repository = repository
+    init(viewModel: BallViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -39,7 +38,7 @@ class ViewController: UIViewController {
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard let text = textField.text, !text.isEmpty else { return }
         textField.endEditing(true)
-        repository.fetchData { (answer) in
+        viewModel.shake { (answer) in
             DispatchQueue.main.async {
                 self.ballAnswerLabel.text = answer
                 self.ballAnswerLabel.isHidden = false
@@ -133,13 +132,12 @@ class ViewController: UIViewController {
     }
     
     @objc func editButtonTapped() {
-        let settingsVC = SettingsViewController()
-        settingsVC.repository = repository
+        let settingsVC = SettingsViewController(viewModel: viewModel.getSettingsViewModel())
         navigationController?.pushViewController(settingsVC, animated: true)
     }
 }
 
-extension ViewController: UITextFieldDelegate {
+extension BallViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
     }

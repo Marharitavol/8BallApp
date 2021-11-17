@@ -24,8 +24,6 @@ internal enum L10n {
   internal static let emoji = L10n.tr("Localizable", "emoji")
   /// from API
   internal static let fromAPI = L10n.tr("Localizable", "from-API")
-  /// cell
-  internal static let identifier = L10n.tr("Localizable", "identifier")
   /// Just do it!
   internal static let justDoIt = L10n.tr("Localizable", "just-do-it")
   /// Ask a question and shake the phone

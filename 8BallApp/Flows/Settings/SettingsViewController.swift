@@ -9,17 +9,23 @@ import UIKit
 import SnapKit
 
 class SettingsViewController: UIViewController {
+    private let viewModel: SettingsViewModel
+    private let identifier = String(describing: UITableViewCell.self)
 
     private let tableView = UITableView()
+    
+    init(viewModel: SettingsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
 
-    private var array = [String]()
-
-    var repository: RepositoryProtocol?
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        array = repository?.getAnswersFromBD() ?? [String]()
-
+        
         setupNavigationController()
         setupTableView()
         selectRow()
@@ -35,12 +41,12 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.identifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
     }
 
     private func selectRow() {
-        let selectedIndex = array.firstIndex(of: repository?.getCurrentAnswer() ?? "") ?? 0
-        tableView.selectRow(at: IndexPath(row: selectedIndex, section: 0), animated: false, scrollPosition: .none)
+        let index = viewModel.currentRow()
+        tableView.selectRow(at: IndexPath(row: index, section: 0), animated: false, scrollPosition: .none)
     }
     
     private func setupNavigationController() {
@@ -57,8 +63,7 @@ class SettingsViewController: UIViewController {
 
         let okAction = UIAlertAction(title: L10n.alertOk, style: .default) { (_) in
             guard let text = alertController.textFields?.first?.text else { return }
-            self.array.append(text)
-            self.repository?.saveAnswerToBD(text)
+            self.viewModel.saveAnswerToBD(text)
             self.tableView.reloadData()
             self.selectRow()
         }
@@ -75,12 +80,13 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return array.count
+        return viewModel.numberOfAnswers()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: L10n.identifier, for: indexPath)
-        let answer = array[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
+                                                 for: indexPath)
+        let answer = viewModel.answer(at: indexPath.row)
 
         cell.textLabel?.text = answer
         return cell
@@ -91,7 +97,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        repository?.changeCurrentAnswer(array[indexPath.row])
+        viewModel.selectAnswer(at: indexPath.row)
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
