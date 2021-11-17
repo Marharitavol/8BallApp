@@ -5,8 +5,6 @@
 //  Created by Rita on 07.11.2021.
 //
 
-import UIKit
-
 protocol RepositoryProtocol {
     func fetchData(completion: @escaping (_ answer: String?) -> Void)
     func saveAnswerToBD(_ answer: String)
