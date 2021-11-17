@@ -10,6 +10,7 @@ import SnapKit
 
 class SettingsViewController: UIViewController {
     private let viewModel: SettingsViewModel
+    private let identifier = String(describing: UITableViewCell.self)
 
     private let tableView = UITableView()
     
@@ -40,7 +41,7 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.identifier)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
     }
 
     private func selectRow() {
@@ -83,7 +84,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: L10n.identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
+                                                 for: indexPath)
         let answer = viewModel.answer(at: indexPath.row)
 
         cell.textLabel?.text = answer
