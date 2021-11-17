@@ -102,9 +102,9 @@
 		5C2F39B0271F3B7500ABD5E1 /* 8BallApp */ = {
 			isa = PBXGroup;
 			children = (
+				5C9F4855274043F100054782 /* Flows */,
 				5C92415C27384413008ECF51 /* Data */,
 				5CEBE442272021BA00076C2E /* Application */,
-				5C9F4855274043F100054782 /* Presentation */,
 				5CB62BF8273EA494006F8DB0 /* Resourses */,
 				5C2F39BC271F3B7800ABD5E1 /* LaunchScreen.storyboard */,
 				5C2F39BF271F3B7800ABD5E1 /* Info.plist */,
@@ -115,8 +115,9 @@
 		5C69FF7D2740552F00ECE2EC /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				5CEBE446272027A200076C2E /* SettingsViewController.swift */,
+				5C69FF81274055D500ECE2EC /* SettingsModel.swift */,
 				5C69FF7E2740558200ECE2EC /* SettingsViewModel.swift */,
+				5CEBE446272027A200076C2E /* SettingsViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -132,13 +133,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		5C9F4855274043F100054782 /* Presentation */ = {
+		5C9F4855274043F100054782 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				5CEBE4432720222E00076C2E /* Main */,
+				5CEBE4432720222E00076C2E /* Ball */,
 				5C69FF7D2740552F00ECE2EC /* Settings */,
 			);
-			path = Presentation;
+			path = Flows;
 			sourceTree = "<group>";
 		};
 		5CB62BF8273EA494006F8DB0 /* Resourses */ = {
@@ -160,15 +161,6 @@
 			path = SwiftGen;
 			sourceTree = "<group>";
 		};
-		5CD89B1E274111D8005F60FF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				5C69FF76274049E900ECE2EC /* BallModel.swift */,
-				5C69FF81274055D500ECE2EC /* SettingsModel.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		5CD89B1F274111EF005F60FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,18 +173,18 @@
 			isa = PBXGroup;
 			children = (
 				5C2F39B1271F3B7500ABD5E1 /* AppDelegate.swift */,
-				5CD89B1E274111D8005F60FF /* Models */,
 			);
 			path = Application;
 			sourceTree = "<group>";
 		};
-		5CEBE4432720222E00076C2E /* Main */ = {
+		5CEBE4432720222E00076C2E /* Ball */ = {
 			isa = PBXGroup;
 			children = (
-				5C2F39B5271F3B7500ABD5E1 /* BallViewController.swift */,
+				5C69FF76274049E900ECE2EC /* BallModel.swift */,
 				5C69FF7927404A4E00ECE2EC /* BallViewModel.swift */,
+				5C2F39B5271F3B7500ABD5E1 /* BallViewController.swift */,
 			);
-			path = Main;
+			path = Ball;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
