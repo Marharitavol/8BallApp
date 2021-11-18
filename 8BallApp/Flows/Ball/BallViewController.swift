@@ -60,7 +60,18 @@ class BallViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         textField.endEditing(true)
     }
+    
+    @objc func editButtonTapped() {
+        let settingsVC = SettingsViewController(viewModel: viewModel.getSettingsViewModel())
+        navigationController?.pushViewController(settingsVC, animated: true)
+    }
+}
 
+extension BallViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+    }
+    
     private func setupSubviews() {
         view.backgroundColor = Asset.purple.color
         view.addSubview(ballEmojiLabel)
@@ -129,16 +140,5 @@ class BallViewController: UIViewController {
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(editButtonTapped))
-    }
-    
-    @objc func editButtonTapped() {
-        let settingsVC = SettingsViewController(viewModel: viewModel.getSettingsViewModel())
-        navigationController?.pushViewController(settingsVC, animated: true)
-    }
-}
-
-extension BallViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
     }
 }

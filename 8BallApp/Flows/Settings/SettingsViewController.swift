@@ -31,29 +31,9 @@ class SettingsViewController: UIViewController {
         selectRow()
     }
 
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-
-        tableView.backgroundColor = Asset.purple.color
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
-    }
-
     private func selectRow() {
         let index = viewModel.currentRow()
         tableView.selectRow(at: IndexPath(row: index, section: 0), animated: false, scrollPosition: .none)
-    }
-    
-    private func setupNavigationController() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add,
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(answerAddTapped))
     }
     
     @objc func answerAddTapped(_ sender: UIBarButtonItem) {
@@ -106,5 +86,25 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+    
+    private func setupTableView() {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+
+        tableView.backgroundColor = Asset.purple.color
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
+    }
+    
+    private func setupNavigationController() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add,
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(answerAddTapped))
     }
 }
