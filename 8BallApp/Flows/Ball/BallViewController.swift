@@ -56,22 +56,18 @@ class BallViewController: UIViewController {
         replayButton.isHidden = true
         ballAnswerLabel.isHidden = true
     }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        textField.endEditing(true)
-    }
     
     @objc func editButtonTapped() {
         let settingsVC = SettingsViewController(viewModel: viewModel.getSettingsViewModel())
         navigationController?.pushViewController(settingsVC, animated: true)
     }
-}
 
-extension BallViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         textField.endEditing(true)
     }
-    
+}
+
+extension BallViewController {
     private func setupSubviews() {
         view.backgroundColor = Asset.purple.color
         view.addSubview(ballEmojiLabel)
@@ -136,9 +132,16 @@ extension BallViewController: UITextFieldDelegate {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = Asset.white.color
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Asset.icon.image,
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(editButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Asset.icon.image,
+            style: .done,
+            target: self,
+            action: #selector(editButtonTapped))
+    }
+}
+
+extension BallViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
     }
 }

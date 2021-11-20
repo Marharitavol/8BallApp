@@ -57,6 +57,29 @@ class SettingsViewController: UIViewController {
     }
 }
 
+extension SettingsViewController {
+    private func setupTableView() {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+
+        tableView.backgroundColor = Asset.purple.color
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
+    }
+    
+    private func setupNavigationController() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: .add,
+            style: .done,
+            target: self,
+            action: #selector(answerAddTapped))
+    }
+}
+
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,25 +109,5 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
-    }
-    
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-
-        tableView.backgroundColor = Asset.purple.color
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
-    }
-    
-    private func setupNavigationController() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add,
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(answerAddTapped))
     }
 }
