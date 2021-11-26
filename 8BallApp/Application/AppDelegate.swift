@@ -40,9 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController(rootViewController: rootViewController)
         navigationController.tabBarItem = UITabBarItem(
             title: nil,
-            image: UIImage(systemName: "clock"),
+            image: UIImage(systemName: L10n.clock),
             selectedImage: nil)
-        navigationController.title = "Main"
+        navigationController.title = L10n.main
         return navigationController
     }
     
@@ -52,9 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let historyViewController = HistoryViewController(viewModel: historyViewModel)
         historyViewController.tabBarItem = UITabBarItem(
             title: nil,
-            image: UIImage(systemName: "star.circle.fill"),
+            image: UIImage(systemName: L10n.starCircleFill),
             selectedImage: nil)
-        historyViewController.title = "History"
+        historyViewController.title = L10n.history
         return historyViewController
     }
 }

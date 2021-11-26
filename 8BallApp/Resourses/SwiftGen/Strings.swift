@@ -20,6 +20,8 @@ internal enum L10n {
   internal static let buttonText = L10n.tr("Localizable", "button-text")
   /// Change your mind
   internal static let changeYourMind = L10n.tr("Localizable", "change-your-mind")
+  /// clock
+  internal static let clock = L10n.tr("Localizable", "clock")
   /// 🔮
   internal static let emoji = L10n.tr("Localizable", "emoji")
   /// from API
@@ -28,12 +30,16 @@ internal enum L10n {
   internal static let history = L10n.tr("Localizable", "history")
   /// Just do it!
   internal static let justDoIt = L10n.tr("Localizable", "just-do-it")
+  /// Main
+  internal static let main = L10n.tr("Localizable", "main")
   /// Ask a question and shake the phone
   internal static let ruleTitle = L10n.tr("Localizable", "rule-title")
   /// settings
   internal static let segueIdentifier = L10n.tr("Localizable", "segue-identifier")
   /// Please choose which answer will be used
   internal static let settingsHeader = L10n.tr("Localizable", "settings-header")
+  /// star.circle.fill
+  internal static let starCircleFill = L10n.tr("Localizable", "star-circle-fill")
   /// answerArray
   internal static let userDefaultsKey = L10n.tr("Localizable", "user-defaults-key")
 }
