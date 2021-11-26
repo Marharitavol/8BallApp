@@ -17,14 +17,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         let repository = Repository()
-        let model = BallModel(repository: repository)
-        let viewModel = BallViewModel(model: model)
-        let rootViewController = BallViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        window?.rootViewController = navigationController
+        
+        window?.rootViewController = setupTabBarController(repository: repository)
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
         
         return true
+    }
+    
+    private func setupTabBarController(repository: Repository) -> UITabBarController {
+        let navigationController = setupBallScreen(repository: repository)
+        let historyVC = setupHistoryScreen(repository: repository)
+        let tabBarController = UITabBarController()
+        tabBarController.setViewControllers([navigationController, historyVC], animated: true)
+        return tabBarController
+    }
+    
+    private func setupBallScreen(repository: Repository) -> UIViewController {
+        let model = BallModel(repository: repository)
+        let viewModel = BallViewModel(model: model)
+        let rootViewController = BallViewController(viewModel: viewModel)
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        navigationController.tabBarItem = UITabBarItem(
+            title: nil,
+            image: UIImage(systemName: "clock"),
+            selectedImage: nil)
+        navigationController.title = "Main"
+        return navigationController
+    }
+    
+    private func setupHistoryScreen(repository: Repository) -> UIViewController {
+        let historyModel = HistoryModel(repository: repository)
+        let historyViewModel = HistoryViewModel(model: historyModel)
+        let historyViewController = HistoryViewController(viewModel: historyViewModel)
+        historyViewController.tabBarItem = UITabBarItem(
+            title: nil,
+            image: UIImage(systemName: "star.circle.fill"),
+            selectedImage: nil)
+        historyViewController.title = "History"
+        return historyViewController
     }
 }

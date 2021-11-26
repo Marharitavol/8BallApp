@@ -11,5 +11,6 @@ target '8BallApp' do
   pod 'Alamofire', '~> 5.4'
   pod 'SwiftLint', '~> 0.45' 
   pod 'SwiftGen', '~> 6.0'
+  pod 'RealmSwift', '~> 10.8.1'
 
 end

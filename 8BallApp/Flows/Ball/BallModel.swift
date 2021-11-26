@@ -21,4 +21,8 @@ class BallModel {
     func getSettingModel() -> SettingsModel {
         return SettingsModel(repository: repository)
     }
+    
+    func saveHistory(_ history: History) {
+        repository.saveHistory(history)
+    }
 }

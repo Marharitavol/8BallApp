@@ -24,8 +24,11 @@ class NetworkClient: NetworkDataProvider {
 
         guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/question") else { return }
 
-        URLSession.shared.dataTask(with: url) { (data, _, _) in
-
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let error = error as? URLError, error.errorCode == -1009 {
+                completion(nil)
+            }
+            
             guard let data = data else { return }
 
             do {

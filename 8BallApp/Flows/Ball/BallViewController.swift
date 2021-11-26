@@ -45,6 +45,7 @@ class BallViewController: UIViewController {
                 self.mainLabel.text = self.textField.text
                 self.textField.isHidden = true
                 self.replayButton.isHidden = false
+                self.viewModel.saveHistory(answer!)
             }
         }
     }

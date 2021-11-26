@@ -2,4 +2,5 @@ disabled_rules:
 - trailing_whitespace
 excluded:
 - Pods/
+- 8BallApp/Data/RealmManager.swift
 

@@ -35,6 +35,3 @@ func cancellationOfDispatchWorkItem() {
         item?.cancel()
     }
 }
-
-//deadlock()
-//cancellationOfDispatchWorkItem()
