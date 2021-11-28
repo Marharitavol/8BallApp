@@ -18,11 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let repository = Repository()
         
+        setupLocalAnswers(repository: repository)
+        
         window?.rootViewController = setupTabBarController(repository: repository)
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
         
         return true
+    }
+    
+    private func setupLocalAnswers(repository: Repository) {
+        guard repository.getAnswersFromBD().isEmpty else { return }
+        repository.saveHistory(History(answer: L10n.fromAPI, isLocal: true))
+        repository.saveHistory(History(answer: L10n.justDoIt, isLocal: true))
+        repository.saveHistory(History(answer: L10n.changeYourMind, isLocal: true))
     }
     
     private func setupTabBarController(repository: Repository) -> UITabBarController {

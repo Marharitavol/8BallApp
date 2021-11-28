@@ -19,16 +19,13 @@ protocol RepositoryProtocol {
 
 class Repository: RepositoryProtocol {
     private let networkDataProvider: NetworkDataProvider
-    private var dBProvider: DBProvider
     private var historyDBProvider: HistoryDBProvider
 
     private var currentAnswer = L10n.fromAPI
 
     init(networkDataProvider: NetworkDataProvider = NetworkClient(),
-         dBProvider: DBProvider = UserDefaultsManager(),
          realmManager: RealmManager = RealmManager()) {
         self.networkDataProvider = networkDataProvider
-        self.dBProvider = dBProvider
         self.historyDBProvider = realmManager
         
     }
@@ -52,7 +49,7 @@ class Repository: RepositoryProtocol {
     }
 
     func saveAnswerToBD(_ answer: String) {
-        dBProvider.answerArray.append(answer)
+        historyDBProvider.saveHistory(History(answer: answer, isLocal: true))
     }
 
     func changeCurrentAnswer(_ answer: String) {
@@ -60,7 +57,9 @@ class Repository: RepositoryProtocol {
     }
 
     func getAnswersFromBD() -> [String] {
-        dBProvider.answerArray
+        historyDBProvider.fetchAnswerArray().map { (history) in
+            return history.answer
+        }
     }
 
     func getCurrentAnswer() -> String {

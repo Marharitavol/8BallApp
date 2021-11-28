@@ -21,8 +21,7 @@ class HistoryViewModel {
     }
     
     func history(at index: Int) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
+        let formatter = Formatters.Date.formatter
         let date = formatter.string(from: history.reversed()[index].date)
         let answer = history.reversed()[index].answer + "  \(String(describing: date))"
         return answer

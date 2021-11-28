@@ -34,7 +34,6 @@ class HistoryViewController: UIViewController {
         super.viewWillAppear(animated)
         viewModel.updateHistory()
         tableView.reloadData()
-        print(Reachability().isConnectedToNetwork())
     }
 }
 
@@ -50,6 +49,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        
+        let identifier = String(describing: UITableViewCell.self)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
     }
 
@@ -58,6 +59,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier = String(describing: UITableViewCell.self)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         cell.selectionStyle = .none
         
@@ -76,34 +78,5 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
-    }
-}
-
-public class Reachability {
-    public func isConnectedToNetwork() -> Bool {
-        var zeroAddress = sockaddr_in()
-        zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
-        zeroAddress.sin_family = sa_family_t(AF_INET)
-
-        guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress, {
-            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
-                SCNetworkReachabilityCreateWithAddress(nil, $0)
-            }
-        }) else {
-            return false
-        }
-
-        var flags: SCNetworkReachabilityFlags = []
-        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
-            return false
-        }
-        if flags.isEmpty {
-            return false
-        }
-
-        let isReachable = flags.contains(.reachable)
-        let needsConnection = flags.contains(.connectionRequired)
-
-        return (isReachable && !needsConnection)
     }
 }

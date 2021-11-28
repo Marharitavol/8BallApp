@@ -26,7 +26,7 @@ class BallViewModel {
     }
     
     func saveHistory(_ answer: String) {
-        let history = History(answer: answer, date: Date())
+        let history = History(answer: answer, date: Date(), isLocal: false)
         model.saveHistory(history)
     }
 }

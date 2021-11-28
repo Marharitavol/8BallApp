@@ -10,6 +10,7 @@ import RealmSwift
 protocol HistoryDBProvider {
     func saveHistory(_ history: History)
     func fetchHistory() -> Results<History>
+    func fetchAnswerArray() -> Results<History>
 }
 
 class RealmManager: HistoryDBProvider {
@@ -22,6 +23,10 @@ class RealmManager: HistoryDBProvider {
     }
 
     func fetchHistory() -> Results<History> {
-        return localRealm.objects(History.self)
+        return localRealm.objects(History.self).filter("isLocal == false")
+    }
+    
+    func fetchAnswerArray() -> Results<History> {
+        return localRealm.objects(History.self).filter("isLocal == true")
     }
 }
