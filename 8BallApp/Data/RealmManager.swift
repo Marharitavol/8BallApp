@@ -14,19 +14,28 @@ protocol HistoryDBProvider {
 }
 
 class RealmManager: HistoryDBProvider {
-    let localRealm = try! Realm()
-
     func saveHistory(_ history: History) {
-        try! localRealm.write {
-            localRealm.add(history)
+        DispatchQueue.global(qos: .background).async {
+            autoreleasepool {
+                let localRealm = try! Realm()
+                try! localRealm.write {
+                    localRealm.add(history)
+                }
+            }
         }
     }
 
     func fetchHistory() -> Results<History> {
-        return localRealm.objects(History.self).filter("isLocal == false")
+        DispatchQueue.global(qos: .background).sync {
+            let localRealm = try! Realm()
+            return localRealm.objects(History.self).filter("isLocal == false")
+        }
     }
     
     func fetchAnswerArray() -> Results<History> {
-        return localRealm.objects(History.self).filter("isLocal == true")
+        DispatchQueue.global(qos: .background).sync {
+            let localRealm = try! Realm()
+            return localRealm.objects(History.self).filter("isLocal == true")
+        }
     }
 }
