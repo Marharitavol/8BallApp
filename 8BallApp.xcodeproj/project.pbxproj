@@ -13,6 +13,10 @@
 		5C2F39BE271F3B7800ABD5E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2F39BC271F3B7800ABD5E1 /* LaunchScreen.storyboard */; };
 		5C2F39C7271F4F3300ABD5E1 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F39C6271F4F3300ABD5E1 /* ApiResponse.swift */; };
 		5C2F39D2271F52D600ABD5E1 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F39D1271F52D600ABD5E1 /* NetworkClient.swift */; };
+		5C45D11C274D6F4F00239A07 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45D11B274D6F4F00239A07 /* History.swift */; };
+		5C45D126274D717000239A07 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45D125274D717000239A07 /* RealmManager.swift */; };
+		5C4CCFB8274EB6DE00098C6E /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4CCFB7274EB6DE00098C6E /* HistoryModel.swift */; };
+		5C4CCFBB274EB6F300098C6E /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4CCFBA274EB6F300098C6E /* HistoryViewModel.swift */; };
 		5C69FF77274049E900ECE2EC /* BallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C69FF76274049E900ECE2EC /* BallModel.swift */; };
 		5C69FF7A27404A4E00ECE2EC /* BallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C69FF7927404A4E00ECE2EC /* BallViewModel.swift */; };
 		5C69FF7F2740558200ECE2EC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C69FF7E2740558200ECE2EC /* SettingsViewModel.swift */; };
@@ -22,7 +26,8 @@
 		5CC9E60C273D7743007AB7C8 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC9E60A273D7743007AB7C8 /* Strings.swift */; };
 		5CC9E614273D78C5007AB7C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5CC9E612273D78C5007AB7C8 /* Localizable.strings */; };
 		5CEBE447272027A200076C2E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEBE446272027A200076C2E /* SettingsViewController.swift */; };
-		5CEBE44F27205AC900076C2E /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEBE44E27205AC800076C2E /* UserDefaultsManager.swift */; };
+		5CF5621C27541A9B00D8D70A /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF5621B27541A9B00D8D70A /* Formatters.swift */; };
+		5CFBF1E2274E47A4004CC7EE /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFBF1E1274E47A4004CC7EE /* HistoryViewController.swift */; };
 		9882861649ACC0E73F5F8B93 /* Pods_8BallApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B4FDF3EF1385ADE1A32EEF /* Pods_8BallApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +41,10 @@
 		5C2F39BF271F3B7800ABD5E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C2F39C6271F4F3300ABD5E1 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		5C2F39D1271F52D600ABD5E1 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		5C45D11B274D6F4F00239A07 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		5C45D125274D717000239A07 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		5C4CCFB7274EB6DE00098C6E /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
+		5C4CCFBA274EB6F300098C6E /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		5C69FF76274049E900ECE2EC /* BallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallModel.swift; sourceTree = "<group>"; };
 		5C69FF7927404A4E00ECE2EC /* BallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallViewModel.swift; sourceTree = "<group>"; };
 		5C69FF7E2740558200ECE2EC /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -46,7 +55,8 @@
 		5CC9E60A273D7743007AB7C8 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		5CC9E613273D78C5007AB7C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5CEBE446272027A200076C2E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		5CEBE44E27205AC800076C2E /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		5CF5621B27541A9B00D8D70A /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		5CFBF1E1274E47A4004CC7EE /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		B209BB7788A37E4EF190ED8D /* Pods-8BallApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-8BallApp.debug.xcconfig"; path = "Target Support Files/Pods-8BallApp/Pods-8BallApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D5B4FDF3EF1385ADE1A32EEF /* Pods_8BallApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_8BallApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -105,6 +115,7 @@
 				5C9F4855274043F100054782 /* Flows */,
 				5C92415C27384413008ECF51 /* Data */,
 				5CEBE442272021BA00076C2E /* Application */,
+				5CF5621A27541A7100D8D70A /* Helpers */,
 				5CB62BF8273EA494006F8DB0 /* Resourses */,
 				5C2F39BC271F3B7800ABD5E1 /* LaunchScreen.storyboard */,
 				5C2F39BF271F3B7800ABD5E1 /* Info.plist */,
@@ -126,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				5C2F39D1271F52D600ABD5E1 /* NetworkClient.swift */,
-				5CEBE44E27205AC800076C2E /* UserDefaultsManager.swift */,
+				5C45D125274D717000239A07 /* RealmManager.swift */,
 				5C92415D2738442E008ECF51 /* Repository.swift */,
 				5CD89B1F274111EF005F60FF /* Models */,
 			);
@@ -138,6 +149,7 @@
 			children = (
 				5CEBE4432720222E00076C2E /* Ball */,
 				5C69FF7D2740552F00ECE2EC /* Settings */,
+				5CFBF1E0274E4786004CC7EE /* History */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -165,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				5C2F39C6271F4F3300ABD5E1 /* ApiResponse.swift */,
+				5C45D11B274D6F4F00239A07 /* History.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -185,6 +198,24 @@
 				5C2F39B5271F3B7500ABD5E1 /* BallViewController.swift */,
 			);
 			path = Ball;
+			sourceTree = "<group>";
+		};
+		5CF5621A27541A7100D8D70A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5CF5621B27541A9B00D8D70A /* Formatters.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5CFBF1E0274E4786004CC7EE /* History */ = {
+			isa = PBXGroup;
+			children = (
+				5C4CCFB7274EB6DE00098C6E /* HistoryModel.swift */,
+				5C4CCFBA274EB6F300098C6E /* HistoryViewModel.swift */,
+				5CFBF1E1274E47A4004CC7EE /* HistoryViewController.swift */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,16 +372,21 @@
 			files = (
 				5C2F39B6271F3B7500ABD5E1 /* BallViewController.swift in Sources */,
 				5C2F39C7271F4F3300ABD5E1 /* ApiResponse.swift in Sources */,
+				5C4CCFB8274EB6DE00098C6E /* HistoryModel.swift in Sources */,
+				5C45D126274D717000239A07 /* RealmManager.swift in Sources */,
 				5CC9E60C273D7743007AB7C8 /* Strings.swift in Sources */,
+				5C4CCFBB274EB6F300098C6E /* HistoryViewModel.swift in Sources */,
 				5C2F39D2271F52D600ABD5E1 /* NetworkClient.swift in Sources */,
 				5CC9E60B273D7743007AB7C8 /* Assets.swift in Sources */,
 				5C92415E2738442E008ECF51 /* Repository.swift in Sources */,
-				5CEBE44F27205AC900076C2E /* UserDefaultsManager.swift in Sources */,
 				5C2F39B2271F3B7500ABD5E1 /* AppDelegate.swift in Sources */,
 				5C69FF7F2740558200ECE2EC /* SettingsViewModel.swift in Sources */,
 				5C69FF77274049E900ECE2EC /* BallModel.swift in Sources */,
+				5CF5621C27541A9B00D8D70A /* Formatters.swift in Sources */,
 				5C69FF7A27404A4E00ECE2EC /* BallViewModel.swift in Sources */,
 				5C69FF82274055D500ECE2EC /* SettingsModel.swift in Sources */,
+				5C45D11C274D6F4F00239A07 /* History.swift in Sources */,
+				5CFBF1E2274E47A4004CC7EE /* HistoryViewController.swift in Sources */,
 				5CEBE447272027A200076C2E /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

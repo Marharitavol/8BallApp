@@ -5,6 +5,8 @@
 //  Created by Rita on 13.11.2021.
 //
 
+import Foundation
+
 class BallViewModel {
     private let model: BallModel
     
@@ -21,5 +23,10 @@ class BallViewModel {
     
     func getSettingsViewModel() -> SettingsViewModel {
         return SettingsViewModel(model: model.getSettingModel())
+    }
+    
+    func saveHistory(_ answer: String) {
+        let history = History(answer: answer, date: Date(), isLocal: false)
+        model.saveHistory(history)
     }
 }
