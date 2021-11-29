@@ -22,12 +22,13 @@ class HistoryViewModel {
     
     func history(at index: Int) -> String {
         let formatter = Formatters.Date.formatter
-        let date = formatter.string(from: history.reversed()[index].date)
+        let date = formatter.string(from: history[index].date)
         let answer = history.reversed()[index].answer + "  \(String(describing: date))"
         return answer
     }
     
     func updateHistory() {
-        history = model.getHistoryFromBD()
+        let historyFromBD = model.getHistoryFromBD()
+        history = historyFromBD.reversed()
     }
 }
