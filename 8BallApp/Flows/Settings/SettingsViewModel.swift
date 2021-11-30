@@ -7,11 +7,10 @@
 
 class SettingsViewModel {
     private let model: SettingsModel
-    private var answers: [String]
+    private var answers = [String]()
     
     init(model: SettingsModel) {
         self.model = model
-        self.answers = model.getAnswersFromBD()
     }
     
     func fetchData(completion: @escaping (_ answer: String?) -> Void) {
@@ -42,5 +41,13 @@ class SettingsViewModel {
     func answer(at index: Int) -> String {
         let answer = answers[index]
         return answer
+    }
+    
+    func updateAnswers(completion: @escaping (_ answer: Bool) -> Void) {
+        model.getAnswersFromBD { (answerArray) in
+            guard let answerArray = answerArray else { return }
+            self.answers = answerArray
+            completion(true)
+        }
     }
 }

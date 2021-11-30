@@ -9,11 +9,10 @@ import Foundation
 class HistoryViewModel {
     
     private let model: HistoryModel
-    private var history: [History]
+    private var history = [History]()
     
     init(model: HistoryModel) {
         self.model = model
-        self.history = model.getHistoryFromBD()
     }
     
     func numberOfHistory() -> Int {
@@ -27,8 +26,11 @@ class HistoryViewModel {
         return answer
     }
     
-    func updateHistory() {
-        let historyFromBD = model.getHistoryFromBD()
-        history = historyFromBD.reversed()
+    func updateHistory(completion: @escaping (_ hasHistoryUpdated: Bool) -> Void) {
+        model.getHistoryFromBD { (historyArray) in
+            guard let historyArray = historyArray else { return }
+            self.history = historyArray.reversed()
+            completion(true)
+        }
     }
 }
