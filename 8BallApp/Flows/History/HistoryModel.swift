@@ -13,7 +13,9 @@ class HistoryModel {
         self.repository = repository
     }
     
-    func getHistoryFromBD() -> [History] {
-        repository.getHistoryFromBD()
+    func getHistoryFromBD(completion: @escaping (_ historyArray: [History]?) -> Void) {
+        repository.getHistoryFromBD { (historyArray) in
+            completion(historyArray)
+        }
     }
 }

@@ -18,8 +18,10 @@ class SettingsModel {
         }
     }
     
-    func getAnswersFromBD() -> [String] {
-        repository.getAnswersFromBD()
+    func getAnswersFromBD(completion: @escaping (_ answers: [String]?) -> Void) {
+        repository.getAnswersFromBD { (answers) in
+            completion(answers)
+        }
     }
     
     func getCurrentAnswer() -> String {

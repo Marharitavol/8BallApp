@@ -30,6 +30,16 @@ class SettingsViewController: UIViewController {
         setupTableView()
         selectRow()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.updateAnswers { (hasAnswersUpdated) in
+            guard hasAnswersUpdated else { return }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 
     private func selectRow() {
         let index = viewModel.currentRow()

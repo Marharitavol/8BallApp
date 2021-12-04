@@ -9,24 +9,50 @@ import RealmSwift
 
 protocol HistoryDBProvider {
     func saveHistory(_ history: History)
-    func fetchHistory() -> Results<History>
-    func fetchAnswerArray() -> Results<History>
+    func fetchHistory(completion: @escaping (_ historyArray: [History]?) -> Void)
+    func fetchLocalHistory(completion: @escaping (_ historyArray: [History]?) -> Void)
 }
 
 class RealmManager: HistoryDBProvider {
-    let localRealm = try! Realm()
-
     func saveHistory(_ history: History) {
-        try! localRealm.write {
-            localRealm.add(history)
+        DispatchQueue.global(qos: .background).async {
+            autoreleasepool {
+                do {
+                    let localRealm = try Realm()
+                    try localRealm.write {
+                        localRealm.add(history)
+                        localRealm.refresh()
+                    }
+                } catch {
+                    print("save Error")
+                }
+            }
         }
     }
-
-    func fetchHistory() -> Results<History> {
-        return localRealm.objects(History.self).filter("isLocal == false")
+    
+    func fetchHistory(completion: @escaping (_ historyArray: [History]?) -> Void) {
+        DispatchQueue.global(qos: .background).sync {
+            do {
+                let localRealm = try Realm()
+                let historyResults = localRealm.objects(History.self).filter("isLocal == false")
+                localRealm.refresh()
+                completion(Array(historyResults))
+            } catch {
+                print("fetchHistory error")
+            }
+        }
     }
     
-    func fetchAnswerArray() -> Results<History> {
-        return localRealm.objects(History.self).filter("isLocal == true")
+    func fetchLocalHistory(completion: @escaping (_ historyArray: [History]?) -> Void) {
+        DispatchQueue.global(qos: .background).sync {
+            do {
+                let localRealm = try Realm()
+                let answerResults = localRealm.objects(History.self).filter("isLocal == true")
+                localRealm.refresh()
+                completion(Array(answerResults))
+            } catch {
+                print("fetchAnswers error")
+            }
+        }
     }
 }

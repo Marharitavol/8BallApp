@@ -11,9 +11,9 @@ protocol RepositoryProtocol {
     func fetchData(completion: @escaping (_ answer: String?) -> Void)
     func saveAnswerToBD(_ answer: String)
     func changeCurrentAnswer(_ answer: String)
-    func getAnswersFromBD() -> [String]
+    func getAnswersFromBD(completion: @escaping (_ answers: [String]?) -> Void)
     func getCurrentAnswer() -> String
-    func getHistoryFromBD() -> [History]
+    func getHistoryFromBD(completion: @escaping (_ historyArray: [History]?) -> Void)
     func saveHistory(_ history: History)
 }
 
@@ -40,10 +40,10 @@ class Repository: RepositoryProtocol {
             if let answer = answer {
                 completion(answer)
             } else {
-                DispatchQueue.main.async {
-                    let localAnswer = self.getHistoryFromBD().randomElement()?.answer
-                    completion(localAnswer)
-                }
+//                DispatchQueue.main.async {
+//                    let localAnswer = self.getHistoryFromBD().randomElement()?.answer
+//                    completion(localAnswer)
+//                }
             }
         }
     }
@@ -56,9 +56,13 @@ class Repository: RepositoryProtocol {
         currentAnswer = answer
     }
 
-    func getAnswersFromBD() -> [String] {
-        historyDBProvider.fetchAnswerArray().map { (history) in
-            return history.answer
+    func getAnswersFromBD(completion: @escaping (_ answers: [String]?) -> Void) {
+        historyDBProvider.fetchLocalHistory { (historyArray) in
+            guard let historyArray = historyArray else { return }
+            let answers = historyArray.map { (history) in
+                return history.answer
+            }
+            completion(answers)
         }
     }
 
@@ -66,9 +70,9 @@ class Repository: RepositoryProtocol {
         currentAnswer
     }
     
-    func getHistoryFromBD() -> [History] {
-        historyDBProvider.fetchHistory().map { (history) in
-            return history
+    func getHistoryFromBD(completion: @escaping (_ historyArray: [History]?) -> Void) {
+        historyDBProvider.fetchHistory { (historyArray) in
+            completion(historyArray)
         }
     }
     
