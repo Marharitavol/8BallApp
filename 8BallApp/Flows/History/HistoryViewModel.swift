@@ -27,8 +27,8 @@ class HistoryViewModel {
     }
     
     func updateHistory(completion: @escaping (_ hasHistoryUpdated: Bool) -> Void) {
-        model.getHistoryFromBD { (historyArray) in
-            guard let historyArray = historyArray else { return }
+        model.getHistoryFromBD { [weak self] (historyArray) in
+            guard let self = self, let historyArray = historyArray else { return }
             self.history = historyArray.reversed()
             completion(true)
         }

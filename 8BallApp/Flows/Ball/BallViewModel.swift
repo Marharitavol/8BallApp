@@ -20,7 +20,8 @@ class BallViewModel {
     
     func shake(completion: @escaping (_ answer: String?) -> Void) {
         startTime()
-        model.fetchData { (answer) in
+        model.fetchData { [weak self] (answer) in
+            guard let self = self else { return }
             self.didAnswerCome = true
             self.checkAnimationTime()
             let formattedAnswer = answer?.uppercased()

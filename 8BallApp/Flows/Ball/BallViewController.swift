@@ -41,7 +41,8 @@ class BallViewController: UIViewController {
         startAnimation()
         ballAnswerLabel.isHidden = true
         textField.endEditing(true)
-        viewModel.shake { (answer) in
+        viewModel.shake { [weak self] (answer) in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 self.ballAnswerLabel.text = answer
                 self.viewModel.saveHistory(answer!)
@@ -154,8 +155,8 @@ extension BallViewController {
     }
     
     private func waitingCallback() {
-        viewModel.callback = { isReady in
-            guard isReady else { return }
+        viewModel.callback = { [weak self] isReady in
+            guard let self = self, isReady else { return }
             self.stopAnimation()
             DispatchQueue.main.async {
                 self.ballAnswerLabel.isHidden = false
