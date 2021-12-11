@@ -33,18 +33,17 @@ class BallViewController: UIViewController {
         setupSubviews()
         setupNavigationBar()
         setupReplayButton()
+        waitingCallback()
     }
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         guard let text = textField.text, !text.isEmpty else { return }
+        startAnimation()
+        ballAnswerLabel.isHidden = true
         textField.endEditing(true)
         viewModel.shake { (answer) in
             DispatchQueue.main.async {
                 self.ballAnswerLabel.text = answer
-                self.ballAnswerLabel.isHidden = false
-                self.mainLabel.text = self.textField.text
-                self.textField.isHidden = true
-                self.replayButton.isHidden = false
                 self.viewModel.saveHistory(answer!)
             }
         }
@@ -88,11 +87,12 @@ extension BallViewController {
         }
         ballAnswerLabel.textAlignment = .center
         ballAnswerLabel.textColor = Asset.white.color
+        ballAnswerLabel.numberOfLines = 0
 
         view.addSubview(replayButton)
         replayButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(40)
+            make.bottom.equalToSuperview().inset(100)
             make.height.equalTo(50)
             make.width.equalTo(160)
         }
@@ -138,6 +138,32 @@ extension BallViewController {
             style: .done,
             target: self,
             action: #selector(editButtonTapped))
+    }
+    
+    private func startAnimation() {
+        UIView.animate(
+            withDuration: 0.2,
+            delay: 0,
+            options: [.repeat, .autoreverse, .curveEaseInOut]) {
+            self.ballEmojiLabel.frame = self.ballEmojiLabel.frame.offsetBy(dx: 5, dy: 0)
+        }
+    }
+    
+    private func stopAnimation() {
+        self.ballEmojiLabel.layer.removeAllAnimations()
+    }
+    
+    private func waitingCallback() {
+        viewModel.callback = { isReady in
+            guard isReady else { return }
+            self.stopAnimation()
+            DispatchQueue.main.async {
+                self.ballAnswerLabel.isHidden = false
+                self.mainLabel.text = self.textField.text
+                self.textField.isHidden = true
+                self.replayButton.isHidden = false
+            }
+        }
     }
 }
 

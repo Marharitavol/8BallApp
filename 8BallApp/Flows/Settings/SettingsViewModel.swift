@@ -44,8 +44,8 @@ class SettingsViewModel {
     }
     
     func updateAnswers(completion: @escaping (_ answer: Bool) -> Void) {
-        model.getAnswersFromBD { (answerArray) in
-            guard let answerArray = answerArray else { return }
+        model.getAnswersFromBD { [weak self] (answerArray) in
+            guard let self = self, let answerArray = answerArray else { return }
             self.answers = answerArray
             completion(true)
         }

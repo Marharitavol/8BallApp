@@ -32,8 +32,8 @@ class HistoryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.updateHistory { (hasHistoryUpdated) in
-            guard hasHistoryUpdated else { return }
+        viewModel.updateHistory { [weak self] (hasHistoryUpdated) in
+            guard let self = self, hasHistoryUpdated else { return }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

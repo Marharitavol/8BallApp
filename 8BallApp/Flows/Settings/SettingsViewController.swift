@@ -33,8 +33,8 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.updateAnswers { (hasAnswersUpdated) in
-            guard hasAnswersUpdated else { return }
+        viewModel.updateAnswers { [weak self] (hasAnswersUpdated) in
+            guard let self = self, hasAnswersUpdated else { return }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
