@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol RepositoryProtocol {
-    func fetchData(completion: @escaping (_ answer: String?) -> Void)
+    func fetchData() -> Observable<String?>
     func saveAnswerToBD(_ answer: String)
     func changeCurrentAnswer(_ answer: String)
     func getAnswersFromBD(completion: @escaping (_ answers: [String]?) -> Void)
@@ -22,6 +23,7 @@ class Repository: RepositoryProtocol {
     private var historyDBProvider: HistoryDBProvider
 
     private var currentAnswer = L10n.fromAPI
+    private let disposeBag = DisposeBag()
 
     init(networkDataProvider: NetworkDataProvider = NetworkClient(),
          realmManager: RealmManager = RealmManager()) {
@@ -30,21 +32,29 @@ class Repository: RepositoryProtocol {
         
     }
 
-    func fetchData(completion: @escaping (_ answer: String?) -> Void) {
-        guard currentAnswer == L10n.fromAPI else {
-            completion(currentAnswer)
-            return
-        }
-
-        networkDataProvider.fetchData { (answer) in
-            if let answer = answer {
-                completion(answer)
-            } else {
-//                DispatchQueue.main.async {
-//                    let localAnswer = self.getHistoryFromBD().randomElement()?.answer
-//                    completion(localAnswer)
-//                }
+    func fetchData() -> Observable<String?> {
+        return Observable.create { (observer) in
+            guard self.currentAnswer == L10n.fromAPI else {
+                observer.on(.next(self.currentAnswer))
+                return Disposables.create()
             }
+
+            self.networkDataProvider.fetchData()
+                .observe(on: MainScheduler.asyncInstance)
+                .subscribe { (answer) in
+                    if let answer = answer {
+                        observer.on(.next(answer))
+                    } else {
+//                        DispatchQueue.main.async {
+//                            let localAnswer = self.getHistoryFromBD().randomElement()?.answer
+//                            completion(localAnswer)
+//                        }
+                    }
+                } onError: { (error) in
+                    print(error)
+                }
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
         }
     }
 

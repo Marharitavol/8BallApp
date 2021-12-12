@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class BallViewModel {
     var callback: ((Bool) -> Void)?
@@ -13,19 +14,28 @@ class BallViewModel {
     private let model: BallModel
     private var animationTimeUp = false
     private var didAnswerCome = false
+    private let disposeBag = DisposeBag()
     
     init(model: BallModel) {
         self.model = model
     }
     
-    func shake(completion: @escaping (_ answer: String?) -> Void) {
+    func shake() -> Observable<String?> {
         startTime()
-        model.fetchData { [weak self] (answer) in
-            guard let self = self else { return }
-            self.didAnswerCome = true
-            self.checkAnimationTime()
-            let formattedAnswer = answer?.uppercased()
-            completion(formattedAnswer)
+        return Observable.create { (observer) in
+            self.model.fetchData()
+                .observe(on: MainScheduler.asyncInstance)
+                .subscribe { [weak self] (answer) in
+                    guard let self = self else { return }
+                    self.didAnswerCome = true
+                    self.checkAnimationTime()
+                    let formattedAnswer = answer?.uppercased()
+                    observer.on(.next(formattedAnswer))
+                } onError: { (error) in
+                    print(error)
+                }
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
         }
     }
     

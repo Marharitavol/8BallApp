@@ -13,12 +13,6 @@ class SettingsViewModel {
         self.model = model
     }
     
-    func fetchData(completion: @escaping (_ answer: String?) -> Void) {
-        model.fetchData { (answer) in
-            completion(answer)
-        }
-    }
-    
     func currentRow() -> Int {
         let selectedIndex = answers.firstIndex(of: model.getCurrentAnswer()) ?? 0
         return selectedIndex

@@ -6,39 +6,55 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol NetworkDataProvider {
-    func fetchData(completion: @escaping (_ answer: String?) -> Void)
+    func fetchData() -> Observable<String?>
 }
 
 class NetworkClient: NetworkDataProvider {
-
+    
+    private enum FetchError: Error {
+        case invalidResponse(URLResponse?)
+        case invalidJSON(Error)
+    }
+    
     var answer = L10n.fromAPI
-
-    func fetchData(completion: @escaping (_ answer: String?) -> Void) {
-
+    
+    func fetchData() -> Observable<String?> {
         guard answer == L10n.fromAPI else {
-            completion(answer)
-            return
+            return Observable.create { (observer) in
+                observer.on(.next(self.answer))
+                return Disposables.create()
+            }
         }
-
-        guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/question") else { return }
-
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-            if let error = error as? URLError, error.errorCode == -1009 {
-                completion(nil)
+        
+        guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/question") else {
+            return Observable.create { (observer) in
+                observer.on(.next(nil))
+                return Disposables.create()
             }
-            
-            guard let data = data else { return }
-
-            do {
-                let decoder = JSONDecoder()
-                let apiResponse = try decoder.decode(ApiResponse.self, from: data)
-                let answer = apiResponse.magic.answer
-                completion(answer)
-            } catch let error {
-                print(error)
+        }
+        let request = URLRequest(url: url)
+        return URLSession.shared.rx.response(request: request)
+            .map { result -> Data in
+                guard result.response.statusCode == 200 else {
+                    throw FetchError.invalidResponse(result.response)
+                }
+                return result.data
+            }.map { data in
+                do {
+                    let apiResponse = try JSONDecoder().decode(
+                        ApiResponse.self, from: data
+                    )
+                    let answer = apiResponse.magic.answer
+                    return answer
+                } catch let error {
+                    throw FetchError.invalidJSON(error)
+                }
             }
-        }.resume()
+            .observe(on: MainScheduler.instance)
+            .asObservable()
     }
 }

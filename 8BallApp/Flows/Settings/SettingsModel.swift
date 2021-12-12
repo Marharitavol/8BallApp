@@ -12,12 +12,6 @@ class SettingsModel {
         self.repository = repository
     }
     
-    func fetchData(completion: @escaping (_ answer: String?) -> Void) {
-        repository.fetchData { (answer) in
-            completion(answer)
-        }
-    }
-    
     func getAnswersFromBD(completion: @escaping (_ answers: [String]?) -> Void) {
         repository.getAnswersFromBD { (answers) in
             completion(answers)
