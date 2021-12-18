@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol RepositoryProtocol {
-    func fetchData(completion: @escaping (_ answer: String?) -> Void)
+    func fetchData() -> Observable<String?>
     func saveAnswerToBD(_ answer: String)
     func changeCurrentAnswer(_ answer: String)
     func getAnswersFromBD(completion: @escaping (_ answers: [String]?) -> Void)
@@ -22,6 +23,7 @@ class Repository: RepositoryProtocol {
     private var historyDBProvider: HistoryDBProvider
 
     private var currentAnswer = L10n.fromAPI
+    private let disposeBag = DisposeBag()
 
     init(networkDataProvider: NetworkDataProvider = NetworkClient(),
          realmManager: RealmManager = RealmManager()) {
@@ -30,21 +32,29 @@ class Repository: RepositoryProtocol {
         
     }
 
-    func fetchData(completion: @escaping (_ answer: String?) -> Void) {
-        guard currentAnswer == L10n.fromAPI else {
-            completion(currentAnswer)
-            return
-        }
-
-        networkDataProvider.fetchData { (answer) in
-            if let answer = answer {
-                completion(answer)
-            } else {
-//                DispatchQueue.main.async {
-//                    let localAnswer = self.getHistoryFromBD().randomElement()?.answer
-//                    completion(localAnswer)
-//                }
+    func fetchData() -> Observable<String?> {
+        return Observable.create { [weak self] (observer) in
+            guard let self = self else { return Disposables.create() }
+            guard self.currentAnswer == L10n.fromAPI else {
+                observer.on(.next(self.currentAnswer))
+                return Disposables.create()
             }
+            
+            self.networkDataProvider.fetchData()
+                .subscribe { [weak self] (answer) in
+                    if let answer = answer {
+                        observer.on(.next(answer))
+                    } else {
+                        self?.getHistoryFromBD { (history) in
+                            let localAnswer = history?.randomElement()?.answer
+                            observer.on(.next(localAnswer))
+                        }
+                    }
+                } onError: { (error) in
+                    print(error)
+                }
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
         }
     }
 

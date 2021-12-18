@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class BallViewController: UIViewController {
 
@@ -16,6 +18,8 @@ class BallViewController: UIViewController {
     private let ballAnswerLabel = UILabel()
     private let ballEmojiLabel = UILabel()
     private let replayButton = UIButton()
+    
+    private let disposeBag = DisposeBag()
 
     init(viewModel: BallViewModel) {
         self.viewModel = viewModel
@@ -33,6 +37,7 @@ class BallViewController: UIViewController {
         setupSubviews()
         setupNavigationBar()
         setupReplayButton()
+        setupBindigns()
         waitingCallback()
     }
 
@@ -41,15 +46,36 @@ class BallViewController: UIViewController {
         startAnimation()
         ballAnswerLabel.isHidden = true
         textField.endEditing(true)
-        viewModel.shake { (answer) in
-            DispatchQueue.main.async {
-                self.ballAnswerLabel.text = answer
-                self.viewModel.saveHistory(answer!)
+        
+        viewModel.shake()
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe { [weak self] (answer) in
+                guard let self = self else { return }
+                    self.ballAnswerLabel.text = answer
+                    self.viewModel.saveHistory(answer!)
+            } onError: { (error) in
+                print(error)
             }
-        }
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func setupBindigns() {
+        replayButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.askAgainTapped()
+            })
+            .disposed(by: disposeBag)
+        
+        navigationItem.rightBarButtonItem?.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.editButtonTapped()
+            })
+            .disposed(by: disposeBag)
     }
 
-    @objc private func askAgainTapped(_ sender: UIButton) {
+    private func askAgainTapped() {
         textField.text = ""
         textField.isHidden = false
         mainLabel.text = L10n.ruleTitle
@@ -57,7 +83,7 @@ class BallViewController: UIViewController {
         ballAnswerLabel.isHidden = true
     }
     
-    @objc func editButtonTapped() {
+    func editButtonTapped() {
         let settingsVC = SettingsViewController(viewModel: viewModel.getSettingsViewModel())
         navigationController?.pushViewController(settingsVC, animated: true)
     }
@@ -125,8 +151,6 @@ extension BallViewController {
         replayButton.layer.borderColor = Asset.white.color.cgColor
         replayButton.clipsToBounds = true
         replayButton.isHidden = true
-        replayButton.addTarget(self, action: #selector(askAgainTapped), for: .touchUpInside)
-
     }
 
     private func setupNavigationBar() {
@@ -137,7 +161,7 @@ extension BallViewController {
             image: Asset.icon.image,
             style: .done,
             target: self,
-            action: #selector(editButtonTapped))
+            action: nil)
     }
     
     private func startAnimation() {

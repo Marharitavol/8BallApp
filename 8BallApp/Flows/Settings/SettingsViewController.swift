@@ -7,12 +7,15 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class SettingsViewController: UIViewController {
     private let viewModel: SettingsViewModel
     private let identifier = String(describing: UITableViewCell.self)
 
     private let tableView = UITableView()
+    private let disposeBag = DisposeBag()
     
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
@@ -29,6 +32,7 @@ class SettingsViewController: UIViewController {
         setupNavigationController()
         setupTableView()
         selectRow()
+        setupBindigns()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +50,16 @@ class SettingsViewController: UIViewController {
         tableView.selectRow(at: IndexPath(row: index, section: 0), animated: false, scrollPosition: .none)
     }
     
-    @objc func answerAddTapped(_ sender: UIBarButtonItem) {
+    private func setupBindigns() {
+        navigationItem.rightBarButtonItem?.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.answerAddTapped()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func answerAddTapped() {
         let alertController = UIAlertController(title: L10n.alertTitle, message: nil, preferredStyle: .alert)
 
         alertController.addTextField(configurationHandler: nil)
@@ -86,7 +99,7 @@ extension SettingsViewController {
             image: .add,
             style: .done,
             target: self,
-            action: #selector(answerAddTapped))
+            action: nil)
     }
 }
 

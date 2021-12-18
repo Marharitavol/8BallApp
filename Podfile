@@ -12,5 +12,7 @@ target '8BallApp' do
   pod 'SwiftLint', '~> 0.45' 
   pod 'SwiftGen', '~> 6.0'
   pod 'RealmSwift', '~> 10.8.1'
+  pod 'RxSwift', '6.2.0'
+  pod 'RxCocoa', '6.2.0'
 
 end
