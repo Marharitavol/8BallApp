@@ -52,7 +52,8 @@ class SettingsViewController: UIViewController {
     
     private func setupBindigns() {
         navigationItem.rightBarButtonItem?.rx.tap
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 self.answerAddTapped()
             })
             .disposed(by: disposeBag)

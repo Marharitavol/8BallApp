@@ -23,38 +23,35 @@ class NetworkClient: NetworkDataProvider {
     var answer = L10n.fromAPI
     
     func fetchData() -> Observable<String?> {
-        guard answer == L10n.fromAPI else {
-            return Observable.create { (observer) in
+        return Observable.create { [weak self] (observer) in
+            guard let self = self else { return Disposables.create() }
+            guard self.answer == L10n.fromAPI else {
                 observer.on(.next(self.answer))
                 return Disposables.create()
             }
-        }
-        
-        guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/question") else {
-            return Observable.create { (observer) in
+            
+            guard let url = URL(string: "https://8ball.delegator.com/magic/JSON/question") else {
                 observer.on(.next(nil))
                 return Disposables.create()
             }
-        }
-        let request = URLRequest(url: url)
-        return URLSession.shared.rx.response(request: request)
-            .map { result -> Data in
-                guard result.response.statusCode == 200 else {
-                    throw FetchError.invalidResponse(result.response)
+            
+            URLSession.shared.dataTask(with: url) { (data, _, error) in
+                if let error = error as? URLError, error.errorCode == -1009 {
+                    observer.on(.next(nil))
                 }
-                return result.data
-            }.map { data in
+                
+                guard let data = data else { return }
+                
                 do {
-                    let apiResponse = try JSONDecoder().decode(
-                        ApiResponse.self, from: data
-                    )
+                    let decoder = JSONDecoder()
+                    let apiResponse = try decoder.decode(ApiResponse.self, from: data)
                     let answer = apiResponse.magic.answer
-                    return answer
+                    observer.on(.next(answer))
                 } catch let error {
-                    throw FetchError.invalidJSON(error)
+                    print(error)
                 }
-            }
-            .observe(on: MainScheduler.instance)
-            .asObservable()
+            }.resume()
+            return Disposables.create()
+        }
     }
 }

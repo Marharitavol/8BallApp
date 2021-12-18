@@ -49,11 +49,10 @@ class BallViewController: UIViewController {
         
         viewModel.shake()
             .observe(on: MainScheduler.asyncInstance)
-            .subscribe { (answer) in
-                DispatchQueue.main.async {
+            .subscribe { [weak self] (answer) in
+                guard let self = self else { return }
                     self.ballAnswerLabel.text = answer
                     self.viewModel.saveHistory(answer!)
-                }
             } onError: { (error) in
                 print(error)
             }
@@ -62,13 +61,15 @@ class BallViewController: UIViewController {
     
     private func setupBindigns() {
         replayButton.rx.tap
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 self.askAgainTapped()
             })
             .disposed(by: disposeBag)
         
         navigationItem.rightBarButtonItem?.rx.tap
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 self.editButtonTapped()
             })
             .disposed(by: disposeBag)

@@ -22,9 +22,9 @@ class BallViewModel {
     
     func shake() -> Observable<String?> {
         startTime()
-        return Observable.create { (observer) in
+        return Observable.create { [weak self] (observer) in
+            guard let self = self else { return Disposables.create() }
             self.model.fetchData()
-                .observe(on: MainScheduler.asyncInstance)
                 .subscribe { [weak self] (answer) in
                     guard let self = self else { return }
                     self.didAnswerCome = true

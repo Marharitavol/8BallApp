@@ -33,22 +33,22 @@ class Repository: RepositoryProtocol {
     }
 
     func fetchData() -> Observable<String?> {
-        return Observable.create { (observer) in
+        return Observable.create { [weak self] (observer) in
+            guard let self = self else { return Disposables.create() }
             guard self.currentAnswer == L10n.fromAPI else {
                 observer.on(.next(self.currentAnswer))
                 return Disposables.create()
             }
-
+            
             self.networkDataProvider.fetchData()
-                .observe(on: MainScheduler.asyncInstance)
-                .subscribe { (answer) in
+                .subscribe { [weak self] (answer) in
                     if let answer = answer {
                         observer.on(.next(answer))
                     } else {
-//                        DispatchQueue.main.async {
-//                            let localAnswer = self.getHistoryFromBD().randomElement()?.answer
-//                            completion(localAnswer)
-//                        }
+                        self?.getHistoryFromBD { (history) in
+                            let localAnswer = history?.randomElement()?.answer
+                            observer.on(.next(localAnswer))
+                        }
                     }
                 } onError: { (error) in
                     print(error)
