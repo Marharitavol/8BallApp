@@ -12,12 +12,14 @@ class BallViewModel {
     var callback: ((Bool) -> Void)?
     
     private let model: BallModel
+    private let flowCoordinator: BallFlowCoordinator
     private var animationTimeUp = false
     private var didAnswerCome = false
     private let disposeBag = DisposeBag()
     
-    init(model: BallModel) {
+    init(model: BallModel, flowCoordinator: BallFlowCoordinator) {
         self.model = model
+        self.flowCoordinator = flowCoordinator
     }
     
     func shake() -> Observable<String?> {
@@ -46,6 +48,10 @@ class BallViewModel {
     func saveHistory(_ answer: String) {
         let history = History(answer: answer, date: Date(), isLocal: false)
         model.saveHistory(history)
+    }
+    
+    func openSettings() {
+        flowCoordinator.openSettings()
     }
     
     private func startTime() {

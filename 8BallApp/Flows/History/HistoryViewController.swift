@@ -11,19 +11,10 @@ import SystemConfiguration
 
 class HistoryViewController: UIViewController {
     
-    private let viewModel: HistoryViewModel
+    var viewModel: HistoryViewModel!
     
     private let tableView = UITableView()
     private let identifier = String(describing: UITableViewCell.self)
-    
-    init(viewModel: HistoryViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

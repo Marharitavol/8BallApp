@@ -12,7 +12,8 @@ import RxCocoa
 
 class BallViewController: UIViewController {
 
-    private let viewModel: BallViewModel
+    var viewModel: BallViewModel!
+    
     private let mainLabel = UILabel()
     private let textField = UITextField()
     private let ballAnswerLabel = UILabel()
@@ -20,15 +21,6 @@ class BallViewController: UIViewController {
     private let replayButton = UIButton()
     
     private let disposeBag = DisposeBag()
-
-    init(viewModel: BallViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,8 +76,7 @@ class BallViewController: UIViewController {
     }
     
     func editButtonTapped() {
-        let settingsVC = SettingsViewController(viewModel: viewModel.getSettingsViewModel())
-        navigationController?.pushViewController(settingsVC, animated: true)
+        viewModel.openSettings()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
