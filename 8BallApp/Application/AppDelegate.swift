@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupLocalAnswers(repository: repository)
         
-        window?.rootViewController = setupTabBarController(repository: repository)
+        window?.rootViewController = AppFlowCoordinator(repository: repository).viewController
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
         
@@ -34,38 +34,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             repository.saveHistory(History(answer: L10n.justDoIt, isLocal: true))
             repository.saveHistory(History(answer: L10n.changeYourMind, isLocal: true))
         }
-    }
-    
-    private func setupTabBarController(repository: Repository) -> UITabBarController {
-        let navigationController = setupBallScreen(repository: repository)
-        let historyVC = setupHistoryScreen(repository: repository)
-        let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([navigationController, historyVC], animated: true)
-        return tabBarController
-    }
-    
-    private func setupBallScreen(repository: Repository) -> UIViewController {
-        let model = BallModel(repository: repository)
-        let viewModel = BallViewModel(model: model)
-        let rootViewController = BallViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: rootViewController)
-        navigationController.tabBarItem = UITabBarItem(
-            title: nil,
-            image: UIImage(systemName: L10n.clock),
-            selectedImage: nil)
-        navigationController.title = L10n.main
-        return navigationController
-    }
-    
-    private func setupHistoryScreen(repository: Repository) -> UIViewController {
-        let historyModel = HistoryModel(repository: repository)
-        let historyViewModel = HistoryViewModel(model: historyModel)
-        let historyViewController = HistoryViewController(viewModel: historyViewModel)
-        historyViewController.tabBarItem = UITabBarItem(
-            title: nil,
-            image: UIImage(systemName: L10n.starCircleFill),
-            selectedImage: nil)
-        historyViewController.title = L10n.history
-        return historyViewController
     }
 }

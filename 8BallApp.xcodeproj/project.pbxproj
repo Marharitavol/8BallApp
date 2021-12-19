@@ -13,6 +13,11 @@
 		5C2F39BE271F3B7800ABD5E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2F39BC271F3B7800ABD5E1 /* LaunchScreen.storyboard */; };
 		5C2F39C7271F4F3300ABD5E1 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F39C6271F4F3300ABD5E1 /* ApiResponse.swift */; };
 		5C2F39D2271F52D600ABD5E1 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F39D1271F52D600ABD5E1 /* NetworkClient.swift */; };
+		5C36C2BA276F38D40011EC8E /* FlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C36C2B9276F38D40011EC8E /* FlowCoordinator.swift */; };
+		5C36C2BD276F39AE0011EC8E /* BallFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C36C2BC276F39AE0011EC8E /* BallFlowCoordinator.swift */; };
+		5C3C0DBA276F945C0078350B /* SettingsFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C0DB9276F945C0078350B /* SettingsFlowCoordinator.swift */; };
+		5C3C0DBD276F96CB0078350B /* HistoryFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C0DBC276F96CB0078350B /* HistoryFlowCoordinator.swift */; };
+		5C3C0DC0276F9B7F0078350B /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C0DBF276F9B7F0078350B /* AppFlowCoordinator.swift */; };
 		5C45D11C274D6F4F00239A07 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45D11B274D6F4F00239A07 /* History.swift */; };
 		5C45D126274D717000239A07 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45D125274D717000239A07 /* RealmManager.swift */; };
 		5C4CCFB8274EB6DE00098C6E /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4CCFB7274EB6DE00098C6E /* HistoryModel.swift */; };
@@ -41,6 +46,11 @@
 		5C2F39BF271F3B7800ABD5E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C2F39C6271F4F3300ABD5E1 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		5C2F39D1271F52D600ABD5E1 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		5C36C2B9276F38D40011EC8E /* FlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowCoordinator.swift; sourceTree = "<group>"; };
+		5C36C2BC276F39AE0011EC8E /* BallFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallFlowCoordinator.swift; sourceTree = "<group>"; };
+		5C3C0DB9276F945C0078350B /* SettingsFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFlowCoordinator.swift; sourceTree = "<group>"; };
+		5C3C0DBC276F96CB0078350B /* HistoryFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFlowCoordinator.swift; sourceTree = "<group>"; };
+		5C3C0DBF276F9B7F0078350B /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		5C45D11B274D6F4F00239A07 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		5C45D125274D717000239A07 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		5C4CCFB7274EB6DE00098C6E /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
@@ -129,6 +139,7 @@
 				5C69FF81274055D500ECE2EC /* SettingsModel.swift */,
 				5C69FF7E2740558200ECE2EC /* SettingsViewModel.swift */,
 				5CEBE446272027A200076C2E /* SettingsViewController.swift */,
+				5C3C0DB9276F945C0078350B /* SettingsFlowCoordinator.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -186,6 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				5C2F39B1271F3B7500ABD5E1 /* AppDelegate.swift */,
+				5C36C2B9276F38D40011EC8E /* FlowCoordinator.swift */,
+				5C3C0DBF276F9B7F0078350B /* AppFlowCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -196,6 +209,7 @@
 				5C69FF76274049E900ECE2EC /* BallModel.swift */,
 				5C69FF7927404A4E00ECE2EC /* BallViewModel.swift */,
 				5C2F39B5271F3B7500ABD5E1 /* BallViewController.swift */,
+				5C36C2BC276F39AE0011EC8E /* BallFlowCoordinator.swift */,
 			);
 			path = Ball;
 			sourceTree = "<group>";
@@ -214,6 +228,7 @@
 				5C4CCFB7274EB6DE00098C6E /* HistoryModel.swift */,
 				5C4CCFBA274EB6F300098C6E /* HistoryViewModel.swift */,
 				5CFBF1E1274E47A4004CC7EE /* HistoryViewController.swift */,
+				5C3C0DBC276F96CB0078350B /* HistoryFlowCoordinator.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -371,8 +386,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C2F39B6271F3B7500ABD5E1 /* BallViewController.swift in Sources */,
+				5C3C0DBA276F945C0078350B /* SettingsFlowCoordinator.swift in Sources */,
 				5C2F39C7271F4F3300ABD5E1 /* ApiResponse.swift in Sources */,
 				5C4CCFB8274EB6DE00098C6E /* HistoryModel.swift in Sources */,
+				5C3C0DBD276F96CB0078350B /* HistoryFlowCoordinator.swift in Sources */,
 				5C45D126274D717000239A07 /* RealmManager.swift in Sources */,
 				5CC9E60C273D7743007AB7C8 /* Strings.swift in Sources */,
 				5C4CCFBB274EB6F300098C6E /* HistoryViewModel.swift in Sources */,
@@ -381,12 +398,15 @@
 				5C92415E2738442E008ECF51 /* Repository.swift in Sources */,
 				5C2F39B2271F3B7500ABD5E1 /* AppDelegate.swift in Sources */,
 				5C69FF7F2740558200ECE2EC /* SettingsViewModel.swift in Sources */,
+				5C36C2BA276F38D40011EC8E /* FlowCoordinator.swift in Sources */,
 				5C69FF77274049E900ECE2EC /* BallModel.swift in Sources */,
+				5C3C0DC0276F9B7F0078350B /* AppFlowCoordinator.swift in Sources */,
 				5CF5621C27541A9B00D8D70A /* Formatters.swift in Sources */,
 				5C69FF7A27404A4E00ECE2EC /* BallViewModel.swift in Sources */,
 				5C69FF82274055D500ECE2EC /* SettingsModel.swift in Sources */,
 				5C45D11C274D6F4F00239A07 /* History.swift in Sources */,
 				5CFBF1E2274E47A4004CC7EE /* HistoryViewController.swift in Sources */,
+				5C36C2BD276F39AE0011EC8E /* BallFlowCoordinator.swift in Sources */,
 				5CEBE447272027A200076C2E /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
