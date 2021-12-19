@@ -18,6 +18,7 @@
 		5C3C0DBA276F945C0078350B /* SettingsFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C0DB9276F945C0078350B /* SettingsFlowCoordinator.swift */; };
 		5C3C0DBD276F96CB0078350B /* HistoryFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C0DBC276F96CB0078350B /* HistoryFlowCoordinator.swift */; };
 		5C3C0DC0276F9B7F0078350B /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C0DBF276F9B7F0078350B /* AppFlowCoordinator.swift */; };
+		5C3C0DC4276FAEAA0078350B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5C3C0DC3276FAEAA0078350B /* README.md */; };
 		5C45D11C274D6F4F00239A07 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45D11B274D6F4F00239A07 /* History.swift */; };
 		5C45D126274D717000239A07 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C45D125274D717000239A07 /* RealmManager.swift */; };
 		5C4CCFB8274EB6DE00098C6E /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4CCFB7274EB6DE00098C6E /* HistoryModel.swift */; };
@@ -51,6 +52,7 @@
 		5C3C0DB9276F945C0078350B /* SettingsFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFlowCoordinator.swift; sourceTree = "<group>"; };
 		5C3C0DBC276F96CB0078350B /* HistoryFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFlowCoordinator.swift; sourceTree = "<group>"; };
 		5C3C0DBF276F9B7F0078350B /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		5C3C0DC3276FAEAA0078350B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5C45D11B274D6F4F00239A07 /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		5C45D125274D717000239A07 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		5C4CCFB7274EB6DE00098C6E /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				5CC9E5FB273D68E2007AB7C8 /* swiftgen.yml */,
+				5C3C0DC3276FAEAA0078350B /* README.md */,
 				5C2F39B0271F3B7500ABD5E1 /* 8BallApp */,
 				5C2F39AF271F3B7500ABD5E1 /* Products */,
 				28BB50BD1FCC7AAF43F3E259 /* Pods */,
@@ -296,6 +299,7 @@
 			files = (
 				5C2F39BE271F3B7800ABD5E1 /* LaunchScreen.storyboard in Resources */,
 				5CC9E614273D78C5007AB7C8 /* Localizable.strings in Resources */,
+				5C3C0DC4276FAEAA0078350B /* README.md in Resources */,
 				5C2F39BB271F3B7800ABD5E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
